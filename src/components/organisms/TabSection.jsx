@@ -325,7 +325,7 @@ function ConcertCompetitionBox() {
     
     const currentConcert = concerts[currentConcertIndex];
     const imageUrl = currentConcert.file_name1
-      ? `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001'}/assets/poster/${currentConcert.file_name1}`
+      ? `${process.env.NEXT_PUBLIC_API_BASE_URL || '/assets/poster/${currentConcert.file_name1}`
       : null;
 
     return (
