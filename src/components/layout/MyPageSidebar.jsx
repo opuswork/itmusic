@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import styles from './MyPageSidebar.module.css';
 
 const myPageMenu = [
-  { label: '비밀번호변경', href: '/mypage/password' },
+  { label: '나의 프로파일일', href: '/mypage/profile' },
   { label: '나의 연주영상', href: '/mypage/videos' },
   { label: '좋아하는 영상', href: '/mypage/liked-videos' },
   { label: '나의 연주사진', href: '/mypage/photos' },

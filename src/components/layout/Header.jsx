@@ -74,7 +74,6 @@ export default function Header() {
       ]
     : [
         { label: '로그인', href: '/login' },
-        { label: '회원가입', href: '/signup' },
         { label: '이탈리아음악협회소개', href: '/about/association' },
         { label: '운영위원&지도위원', href: '/committee/operators' },
         { label: '협회공지&소식', href: '/news/notice' },
