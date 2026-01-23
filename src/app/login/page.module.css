@@ -1,0 +1,350 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.subHeaderWrapper {
+  width: 100%;
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+.contentWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  padding: 0;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 20px;
+}
+
+.sidebarPlaceholder {
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.mainContent {
+  flex: 1;
+  font-family: 'S-CoreDream';
+  padding: 30px 30px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 30px 0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #640a0a;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.loginFormContainer {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+}
+
+.loginForm {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  font-family: 'S-CoreDream';
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #640a0a;
+}
+
+.input::placeholder {
+  color: #999;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'S-CoreDream';
+  background-color: #640a0a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.loginButton:hover:not(:disabled) {
+  background-color: #7a0d0d;
+}
+
+.loginButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.snsDivider {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.snsLoginButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.snsButton {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'S-CoreDream';
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  position: relative;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.snsButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.snsButton:active {
+  transform: translateY(0);
+}
+
+.snsIcon {
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+}
+
+.snsButtonText {
+  font-size: 16px;
+  font-family: 'S-CoreDream';
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.facebookButton {
+  background-color: #1877f2;
+  color: #fff;
+}
+
+.kakaoButton {
+  background-color: #fee500;
+  color: #000;
+}
+
+.naverButton {
+  background-color: #03c75a;
+  color: #fff;
+}
+
+.googleButton {
+  background-color: #ea4335;
+  color: #fff;
+}
+
+.errorMessage {
+  color: #d32f2f;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+  text-align: center;
+  padding: 10px;
+  background-color: #ffebee;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.recoveryLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.recoveryLink {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+  transition: color 0.3s ease;
+}
+
+.recoveryLink:hover {
+  color: #640a0a;
+}
+
+.separator {
+  color: #ddd;
+  font-size: 14px;
+}
+
+.signupButton {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  font-family: 'S-CoreDream';
+  background-color: #fff;
+  color: #0066cc;
+  border: 1px solid #640a0a;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 10px;
+}
+
+.signupButton:hover {
+  background-color: #f5f5f5;
+}
+
+.closeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #0066cc;
+  color: #fff;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .subHeaderWrapper {
+    background-color: #e0e0e0;
+  }
+
+  .sidebarPlaceholder {
+    display: none;
+  }
+
+  .rightSection .sidebarPlaceholder {
+    display: block;
+    width: 100%;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    padding: 0;
+    align-items: center;
+  }
+
+  .rightSection {
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mainContent {
+    padding: 20px 0;
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+    width: 80%;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .loginFormContainer {
+    width: 80%;
+    max-width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .loginForm {
+    padding: 30px 20px;
+  }
+
+  .snsDivider {
+    margin: 15px 0;
+  }
+
+  .snsLoginButtons {
+    gap: 8px;
+  }
+
+  .snsButton {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

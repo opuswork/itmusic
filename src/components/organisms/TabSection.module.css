@@ -1,0 +1,455 @@
+.tabSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  gap: 30px;
+}
+
+.tabBox {
+  font-family: 'S-CoreDream';
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .tabSection {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.tabButtons {
+  font-family: 'S-CoreDream';
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px solid #000;
+  margin-bottom: 30px;
+}
+
+.tabButton {
+  padding: 15px 30px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tabButton:hover {
+  color: #333;
+}
+
+.tabButton.activeRed {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+.tabButton.activeRed::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #d32f2f;
+}
+
+.tabButton.activeBlue {
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.tabButton.activeBlue::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #1976d2;
+}
+
+.tabPanel {
+  min-height: 400px;
+}
+
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.listItem {
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 15px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.listItem.hovered {
+  background-color: #eeeeee;
+}
+
+.loadingText,
+.emptyText {
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.concertContainer {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  margin-bottom: 0;
+  position: relative;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.concertImage {
+  flex-shrink: 0;
+  width: 300px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: opacity 0.3s ease;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 14px;
+}
+
+.concertInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.concertTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.concertDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.concertDetails p {
+  margin: 0;
+}
+
+.detailBtn {
+  padding: 12px 30px;
+  background-color: #ff6b9d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.detailBtn:hover {
+  background-color: #ff5a8a;
+}
+
+.slideDots {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ffb3d1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dot:hover {
+  background-color: #ff9bc4;
+  transform: scale(1.1);
+}
+
+.dot.active {
+  width: 24px;
+  height: 12px;
+  border-radius: 6px;
+  background-color: #8b4513;
+  transform: none;
+}
+
+/* 모달 스타일 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 20px auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1001;
+  transition: background-color 0.2s;
+  font-family: 'S-CoreDream';
+}
+
+.modalCloseButton:hover {
+  background-color: #b71c1c;
+}
+
+.modalHeader {
+  padding: 30px 30px 15px 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'S-CoreDream';
+}
+
+.modalBody {
+  padding: 30px;
+}
+
+.modalBody h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'S-CoreDream';
+}
+
+.modalDate {
+  margin: 0 0 20px 0;
+  color: #666;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+}
+
+.modalInfoTable {
+  margin: 20px 0;
+}
+
+.detailTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.detailTable th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  width: 120px;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+}
+
+.detailTable td {
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  color: #555;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+}
+
+.modalContentText {
+  margin-top: 20px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.8;
+  font-family: 'S-CoreDream';
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.modalContentText p {
+  margin: 0 0 15px 0;
+}
+
+.modalContentText img {
+  max-width: 100%;
+  height: auto;
+}
+
+.modalLink {
+  margin-top: 20px;
+}
+
+.videoLink {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #1976d2;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  font-family: 'S-CoreDream';
+}
+
+.videoLink:hover {
+  background-color: #1565c0;
+}
+
+.modalImageContainer {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.modalFullImage {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .concertContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .concertImage {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 3/4;
+  }
+
+  .concertInfo {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .concertTitle {
+    text-align: center;
+  }
+
+  .concertDetails {
+    align-items: center;
+    text-align: center;
+  }
+
+  .detailBtn {
+    align-self: center;
+    margin: 0 auto;
+  }
+
+  .modalContent {
+    max-width: 95%;
+    margin: 10px;
+    max-height: calc(100vh - 20px);
+  }
+
+  .modalHeader {
+    padding: 20px 20px 15px 20px;
+  }
+
+  .modalHeader h2 {
+    font-size: 20px;
+  }
+
+  .modalBody {
+    padding: 20px;
+  }
+
+  .detailTable th,
+  .detailTable td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .detailTable th {
+    width: 100px;
+  }
+
+  .modalFullImage {
+    width: 100%;
+  }
+}

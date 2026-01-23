@@ -1,0 +1,161 @@
+.sidebar {
+  width: 250px;
+  background-color: #640a0a;
+  padding: 30px 0;
+  min-height: calc(100vh - 200px);
+  flex-shrink: 0;
+  border-radius: 0 0px 100px 20px;
+  overflow: hidden;
+}
+
+.sidebarTitle {
+  font-family: 'S-CoreDream';
+  font-size: 24px;
+  font-weight: 600;
+  color: #beb2b2;
+  padding: 0 30px;
+  margin: 0 0 30px 0;
+}
+
+.sidebarMenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebarMenuItem {
+  color: #beb2b2;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebarLink {
+  display: block;
+  padding: 15px 30px;
+  text-decoration: none;
+  color: #beb2b2;
+  font-size: 16px;
+  font-family: 'S-CoreDream';
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebarLink:hover {
+  background-color: #640a0a;
+  color: #beb2b2;
+}
+
+.sidebarLink.active {
+  background-color: #640a0a;
+  color: #fff;
+  border-left-color: #d32f2f;
+  font-weight: 600;
+  position: relative;
+  padding-left: 50px;
+}
+
+.sidebarLink.active::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.collapseButton {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 15px 30px;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: auto;
+}
+
+.collapseButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.expandButton {
+  width: 100%;
+  background-color: #640a0a;
+  border: none;
+  padding: 15px 20px;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+  border-top: 2px solid #d32f2f;
+}
+
+.expandButton:hover {
+  background-color: #7a0d0d;
+}
+
+/* 데스크톱에서 접기/펼치기 버튼 숨김 */
+@media (min-width: 769px) {
+  .collapseButton,
+  .expandButton {
+    display: none;
+  }
+}
+
+.toggleIcon {
+  font-size: 12px;
+}
+
+/* 태블릿 화면 (769px ~ 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+    padding: 20px 0;
+    flex-shrink: 0;
+  }
+
+  .sidebarTitle {
+    font-size: 20px;
+    padding: 0 20px;
+    margin: 0 0 20px 0;
+  }
+
+  .sidebarLink {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .collapseButton,
+  .expandButton {
+    display: none;
+  }
+}
+
+/* 모바일 화면 (768px 이하) */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    border-radius: 0;
+  }
+
+  .collapseButton,
+  .expandButton {
+    display: flex;
+  }
+}

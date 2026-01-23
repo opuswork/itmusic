@@ -1,0 +1,45 @@
+.subHeader {
+  flex: 1;
+  background-color: #e0e0e0;
+  padding: 15px 20px 8px 0;
+  border-bottom: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+}
+
+.subHeaderContent {
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'S-CoreDream';
+  line-height: 1.2;
+}
+
+.homeLink {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.homeLink:hover {
+  color: #d32f2f;
+}
+
+.homeIcon {
+  font-size: 18px;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .subHeader {
+    flex: 1;
+    padding: 15px 20px;
+  }
+}

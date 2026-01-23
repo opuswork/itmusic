@@ -1,0 +1,446 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.subHeaderWrapper {
+  width: 100%;
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+.contentWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  padding: 0;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarPlaceholder {
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.mainContent {
+  flex: 1;
+  font-family: 'S-CoreDream';
+  padding: 30px 30px 40px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 30px 0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #d32f2f;
+  text-align: center;
+}
+
+.content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.content p {
+  margin: 0 0 20px 0;
+}
+
+/* 검색바 스타일 */
+.searchContainer {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.searchForm {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #d32f2f;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background-color: #e0e0e0;
+}
+
+/* 게시판 스타일 */
+.boardContainer {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.noticeTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.noticeTable thead {
+  background-color: #f5f5f5;
+}
+
+.noticeTable th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  font-size: 16px;
+}
+
+.noticeTable td {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #555;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.noticeTable tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.noticeTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.subjectButton {
+  background: none;
+  border: none;
+  color: #1976d2;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  font-size: 14px;
+  text-decoration: underline;
+  font-family: 'S-CoreDream';
+}
+
+.subjectButton:hover {
+  color: #1565c0;
+}
+
+.loadingCell,
+.emptyCell {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.loadingIndicator {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* 모달 스타일 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1001;
+  transition: background-color 0.2s;
+  font-family: 'S-CoreDream';
+}
+
+.modalCloseButton:hover {
+  background-color: #b71c1c;
+}
+
+.modalHeader {
+  padding: 30px 30px 15px 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modalHeader h2 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'S-CoreDream';
+}
+
+.modalDate {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  font-family: 'S-CoreDream';
+}
+
+.modalBody {
+  padding: 30px;
+}
+
+.modalContentText {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.8;
+  font-family: 'S-CoreDream';
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.modalContentText p {
+  margin: 0 0 15px 0;
+}
+
+.modalContentText img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 태블릿 화면 (768px ~ 1024px) */
+@media (max-width: 768px) {
+  .contentWrapper {
+    max-width: 100%;
+    padding: 0;
+    gap: 15px;
+  }
+
+  .rightSection {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .mainContent {
+    padding: 25px 15px 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pageTitle {
+    font-size: 28px;
+    margin: 0 0 25px 0;
+  }
+
+  .searchContainer {
+    margin-top: 25px;
+    margin-bottom: 20px;
+  }
+
+  .searchForm {
+    gap: 8px;
+  }
+
+  .searchInput {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .searchButton {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .boardContainer {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .noticeTable {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .noticeTable th {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+
+  .noticeTable td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .subjectButton {
+    font-size: 13px;
+  }
+
+  .modalContent {
+    max-width: 85%;
+  }
+
+  .modalHeader h2 {
+    font-size: 22px;
+  }
+
+  .modalContentText {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .subHeaderWrapper {
+    background-color: #e0e0e0;
+    width: 100%;
+  }
+
+  .subHeaderWrapper .contentWrapper {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .subHeaderWrapper .sidebarPlaceholder {
+    display: none;
+  }
+
+  .sidebarPlaceholder {
+    display: none;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .mainContent {
+    padding: 20px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .searchForm {
+    flex-direction: column;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .searchButton {
+    width: 100%;
+  }
+
+  .noticeTable {
+    font-size: 12px;
+  }
+
+  .noticeTable th,
+  .noticeTable td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  .modalContent {
+    max-width: 95%;
+    margin: 10px;
+  }
+
+  .modalCloseButton {
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .modalHeader {
+    padding: 20px 20px 15px 20px;
+  }
+
+  .modalHeader h2 {
+    font-size: 18px;
+  }
+
+  .modalBody {
+    padding: 20px;
+  }
+
+  .modalContentText {
+    font-size: 12px;
+  }
+}

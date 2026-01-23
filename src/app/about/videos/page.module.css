@@ -1,0 +1,286 @@
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .subHeaderWrapper {
+    width: 100%;
+    background-color: #e0e0e0;
+    position: relative;
+  }
+  
+  .contentWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    /* gap: 30px; */
+    padding: 0;
+    flex: 1;
+    align-items: flex-start;
+  }
+  
+  .rightSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebarPlaceholder {
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 100%;
+    flex-shrink: 0;
+  }
+  
+  .mainContent {
+    flex: 1;
+    font-family: 'S-CoreDream';
+    padding: 30px 30px 40px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pageTitle {
+    font-size: 32px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 30px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #d32f2f;
+    text-align: center;
+  }
+  
+  .content {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+  }
+  
+  .content p {
+    margin: 0 0 20px 0;
+  }
+  
+  .boardContainer {
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  .videoTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .videoTable thead {
+    background-color: #f5f5f5;
+  }
+
+  .videoTable th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    font-size: 16px;
+  }
+
+  .videoTable td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #555;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  .videoTable tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  .videoTable tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .videoLinkButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .videoLinkButton:hover {
+    transform: scale(1.1);
+  }
+
+  .videoLinkButton:active {
+    transform: scale(0.95);
+  }
+
+  .loadingIndicator {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 14px;
+  }
+
+  /* 모달 스타일 */
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+
+  .modalContent {
+    background-color: #fff;
+    border-radius: 8px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .modalCloseButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #d32f2f;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 1001;
+    transition: background-color 0.2s;
+  }
+
+  .modalCloseButton:hover {
+    background-color: #b71c1c;
+  }
+
+  .modalVideoContainer {
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 비율 */
+    position: relative;
+    background-color: #000;
+  }
+
+  .modalVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .modalError {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+  }
+
+  .modalError p {
+    margin: 10px 0;
+  }
+
+  .modalLink a {
+    color: #4CAF50;
+    text-decoration: underline;
+  }
+
+  .modalInfo {
+    padding: 20px;
+  }
+
+  .modalInfo h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 20px;
+  }
+
+  .modalInfo p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .subHeaderWrapper {
+      background-color: #e0e0e0;
+    }
+
+    .sidebarPlaceholder {
+      display: none;
+    }
+
+    .contentWrapper {
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .mainContent {
+      padding: 20px;
+    }
+
+    .pageTitle {
+      font-size: 24px;
+    }
+
+    .videoTable {
+      font-size: 12px;
+    }
+
+    .videoTable th,
+    .videoTable td {
+      padding: 10px 8px;
+      font-size: 12px;
+    }
+
+    .modalContent {
+      max-width: 95%;
+      margin: 10px;
+    }
+
+    .modalCloseButton {
+      top: 10px;
+      right: 10px;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .modalInfo {
+      padding: 15px;
+    }
+
+    .modalInfo h3 {
+      font-size: 16px;
+    }
+
+    .modalInfo p {
+      font-size: 12px;
+    }
+  }
+  

@@ -1,0 +1,200 @@
+.header {
+  font-family: 'xeicon';
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 모바일에서는 숨기지 않음 */
+@media (max-width: 768px) {
+  .header.hidden {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* 데스크톱 버전 */
+.desktopHeader {
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.headerContent {
+  font-family: 'xeicon';
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+}
+
+.loginSection {
+  width: 130px;
+  flex: 0 0 auto;
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+  background-color: #f5f5f5;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-left: 1px solid #e0e0e0;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+}
+
+.signupSection {
+  flex: 0 0 auto;
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+  background-color: #f5f5f5;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-left: 1px solid #e0e0e0;
+}
+
+.loginSection:first-child {
+  border-left: none;
+}
+
+.loginSection:hover,
+.signupSection:hover {
+  background-color: #9e9e9e;
+  color: #fff;
+}
+
+.logoutButton {
+  flex: 0 0 auto;
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+  background-color: #f5f5f5;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-left: 1px solid #e0e0e0;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.logoutButton:hover {
+  background-color: #9e9e9e;
+  color: #fff;
+}
+
+/* 모바일 버전 */
+.mobileHeader {
+  display: none;
+  position: relative;
+  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobileLogo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.mobileLogo img {
+  width: auto;
+  height: auto;
+  max-width: 150px;
+  max-height: 40px;
+  object-fit: contain;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownItem {
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s ease;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  display: block;
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background-color: #f5f5f5;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .desktopHeader {
+    display: none;
+  }
+
+  .mobileHeader {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileHeader {
+    display: none;
+  }
+}

@@ -1,0 +1,118 @@
+.navContainer {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.nav {
+  font-family: 'S-CoreDream';
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navContent {
+  font-family: 'S-CoreDream';
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo img {
+  width: 200px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.menuWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.menuList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+  justify-content: flex-end;
+}
+
+.menuItem {
+  position: relative;
+}
+
+.menuLink {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 0;
+  transition: color 0.3s ease;
+  display: block;
+}
+
+.menuLink:hover {
+  color: #d32f2f;
+}
+
+.subMenuWrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-top: 2px solid #d32f2f;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px 0;
+  margin-top: 0;
+}
+
+.subMenu {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.subMenuItem {
+  padding: 0;
+}
+
+.subMenuLink {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.subMenuLink:hover {
+  background-color: #f5f5f5;
+}
+
+/* 모바일에서 Nav 숨김 */
+@media (max-width: 768px) {
+  .navContainer {
+    display: none;
+  }
+}

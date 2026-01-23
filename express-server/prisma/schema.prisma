@@ -1,0 +1,280 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model board_trustee {
+  num        BigInt    @id(map: "idx_36628_primary") @default(autoincrement())
+  order_num  BigInt
+  name       String?   @db.VarChar(255)
+  profile    String
+  position   String
+  reg_date   DateTime? @db.Timestamptz(6)
+  file_name1 String?   @db.VarChar(100)
+}
+
+model bottom_banner {
+  num         BigInt    @id(map: "idx_36635_primary") @default(autoincrement())
+  banner_name String    @default("") @db.VarChar(128)
+  reg_date    DateTime? @db.Timestamptz(6)
+  file_name1  String?   @db.VarChar(100)
+  link        String?   @db.VarChar(255)
+}
+
+model competition_winners_histry {
+  num               BigInt    @id(map: "idx_36641_primary") @default(autoincrement())
+  competition_title String?   @db.VarChar(255)
+  winners_list      String
+  reg_date          DateTime? @db.Timestamptz(6)
+  file_name1        String?   @db.VarChar(100)
+}
+
+model concerts {
+  num              BigInt    @id(map: "idx_36648_primary") @default(autoincrement())
+  category         String?   @db.VarChar(255)
+  subject          String    @default("") @db.VarChar(128)
+  event_start_date DateTime? @db.Timestamptz(6)
+  event_end_date   DateTime? @db.Timestamptz(6)
+  content          String?
+  location         String    @default("다큐홀") @db.VarChar(255)
+  operator         String    @default("이탈리아음악협회") @db.VarChar(100)
+  planner          String    @default("이탈리아음악협회") @db.VarChar(100)
+  reg_date         DateTime? @db.Timestamptz(6)
+  supporter        String    @default("이탈리아음악협회") @db.VarChar(255)
+  user_ip          String    @default("") @db.VarChar(16)
+  visit            Int       @default(0)
+  file_name1       String?   @db.VarChar(100)
+  file_name2       String?   @db.VarChar(100)
+  file_name3       String?   @db.VarChar(100)
+}
+
+model consultants {
+  num        BigInt    @id(map: "idx_36662_primary") @default(autoincrement())
+  order_num  BigInt
+  name       String?   @db.VarChar(255)
+  profile    String
+  position   String
+  reg_date   DateTime? @db.Timestamptz(6)
+  file_name1 String?   @db.VarChar(100)
+}
+
+model events {
+  num              BigInt    @id(map: "idx_36669_primary") @default(autoincrement())
+  category         String?   @default("성악콩쿠르") @db.VarChar(255)
+  subject          String    @default("") @db.VarChar(128)
+  order_num        BigInt
+  event_start_date DateTime? @db.Timestamptz(6)
+  event_end_date   DateTime? @db.Timestamptz(6)
+  content          String?
+  location         String    @default("다큐홀") @db.VarChar(255)
+  operator         String    @default("이탈리아음악협회") @db.VarChar(100)
+  planner          String    @default("이탈리아음악협회") @db.VarChar(100)
+  reg_date         DateTime? @db.Timestamptz(6)
+  supporter        String    @default("이탈리아음악협회") @db.VarChar(255)
+  user_ip          String    @default("") @db.VarChar(16)
+  visit            Int       @default(0)
+  file_name1       String?   @db.VarChar(100)
+  file_name2       String?   @db.VarChar(100)
+  file_name3       String?   @db.VarChar(100)
+}
+
+model italy_culture {
+  num        BigInt    @id(map: "idx_36684_primary") @default(autoincrement())
+  user_name  String    @default("") @db.VarChar(32)
+  email      String?   @db.VarChar(64)
+  user_pwd   String    @default("") @db.VarChar(20)
+  category   String?   @db.VarChar(255)
+  subject    String    @default("") @db.VarChar(128)
+  content    String?
+  reg_date   DateTime? @db.Timestamptz(6)
+  user_ip    String    @default("") @db.VarChar(16)
+  visit      Int       @default(0)
+  file_name1 String?   @default("1") @db.VarChar(100)
+  file_name2 String?   @default("none") @db.VarChar(100)
+  file_name3 String?   @default("none") @db.VarChar(100)
+}
+
+model itmusic_concour_intro {
+  num      BigInt    @id(map: "idx_36699_primary") @default(autoincrement())
+  subject  String    @default("") @db.VarChar(128)
+  text     String?
+  reg_date DateTime? @db.Timestamptz(6)
+}
+
+model itmusic_director {
+  num        BigInt    @id(map: "idx_36706_primary")
+  name       String    @default("") @db.VarChar(128)
+  position   String    @db.VarChar(128)
+  text       String?
+  reg_date   DateTime? @db.Timestamptz(6)
+  file_name1 String    @db.VarChar(128)
+}
+
+model itmusic_history {
+  num      BigInt    @id(map: "idx_36713_primary") @default(autoincrement())
+  subject  String    @default("") @db.VarChar(128)
+  text     String?
+  reg_date DateTime? @db.Timestamptz(6)
+}
+
+model itmusic_introduction {
+  num      BigInt    @id(map: "idx_36720_primary")
+  subject  String    @default("") @db.VarChar(128)
+  text     String?
+  reg_date DateTime? @db.Timestamptz(6)
+}
+
+model itmusic_president {
+  num        BigInt    @id(map: "idx_36727_primary") @default(autoincrement())
+  name       String    @default("") @db.VarChar(128)
+  position   String    @db.VarChar(128)
+  text       String?
+  reg_date   DateTime? @db.Timestamptz(6)
+  file_name1 String    @db.VarChar(128)
+}
+
+model itmusic_purpose {
+  num      BigInt    @id(map: "idx_36735_primary") @default(autoincrement())
+  subject  String    @default("") @db.VarChar(128)
+  text     String?
+  reg_date DateTime? @db.Timestamptz(6)
+}
+
+model member_video {
+  num      BigInt    @id(map: "idx_36757_primary") @default(autoincrement())
+  subject  String    @default("") @db.VarChar(128)
+  text     String?
+  link     String?   @db.VarChar(255)
+  reg_date DateTime? @db.Timestamptz(6)
+}
+
+model members {
+  uno                    Int                      @id(map: "idx_36743_primary") @default(autoincrement())
+  passwd                 String                   @db.VarChar(60)
+  username               String                   @unique(map: "idx_36743_username") @db.VarChar(80)
+  firstname              String                   @db.VarChar(30)
+  lastname               String                   @db.VarChar(20)
+  sex                    BigInt
+  company_school         String                   @db.VarChar(100)
+  position_status        String?                  @db.VarChar(50)
+  study_area             String?                  @db.VarChar(50)
+  school_name            String                   @db.VarChar(100)
+  study_area2            String?                  @db.VarChar(255)
+  study_area_memo        String?                  @db.VarChar(255)
+  study_abroad           String?                  @db.VarChar(255)
+  marketing              BigInt?
+  major_teacher          String?                  @db.VarChar(128)
+  webpage                String?                  @db.VarChar(255)
+  contents               String?
+  file_name1             String?                  @db.VarChar(128)
+  file_name2             String?                  @db.VarChar(128)
+  birthday               String?                  @db.VarChar(10)
+  email                  String?                  @db.VarChar(255)
+  phone                  String?                  @db.VarChar(20)
+  mobile                 String?                  @default("") @db.VarChar(14)
+  zipcode                String?                  @db.VarChar(7)
+  addr1                  String?                  @db.VarChar(255)
+  addr2                  String?                  @db.VarChar(128)
+  state                  String?                  @db.VarChar(5)
+  job                    String?                  @db.VarChar(128)
+  signdate               DateTime?                @db.Timestamptz(6)
+  userlevel              members_userlevel?       @default(dbgenerated("1"))
+  membership_fee_paydate DateTime                 @db.Timestamptz(6)
+  login_yb               members_login_yb?
+  email_preference1      String?                  @default("0") @db.VarChar(10)
+  email_preference2      String?                  @default("0") @db.VarChar(10)
+  email_preference3      String?                  @default("0") @db.VarChar(10)
+  terms_condition        members_terms_condition? @default(on)
+  status                 members_status           @default(pending)
+}
+
+model notice {
+  num        BigInt    @id(map: "idx_36765_primary") @default(autoincrement())
+  user_name  String    @default("") @db.VarChar(32)
+  email      String?   @db.VarChar(64)
+  user_pwd   String    @default("") @db.VarChar(20)
+  category   String?   @db.VarChar(255)
+  subject    String    @default("") @db.VarChar(128)
+  content    String?
+  reg_date   DateTime? @db.Timestamptz(6)
+  user_ip    String    @default("") @db.VarChar(16)
+  visit      Int       @default(0)
+  file_name1 String?   @default("1") @db.VarChar(100)
+  file_name2 String?   @default("none") @db.VarChar(100)
+  file_name3 String?   @default("none") @db.VarChar(100)
+}
+
+model opr_mem {
+  num        BigInt    @id(map: "idx_36780_primary") @default(autoincrement())
+  order_num  BigInt
+  name       String?   @db.VarChar(255)
+  profile    String
+  position   String    @db.VarChar(50)
+  reg_date   DateTime? @db.Timestamptz(6)
+  file_name1 String?   @db.VarChar(100)
+}
+
+model slider {
+  num        BigInt    @id(map: "idx_36787_primary") @default(autoincrement())
+  order_num  BigInt
+  category   String?   @db.VarChar(255)
+  subject    String    @default("") @db.VarChar(128)
+  reg_date   DateTime? @db.Timestamptz(6)
+  file_name1 String?   @db.VarChar(100)
+  link       String?   @db.VarChar(255)
+  open_type  BigInt?
+  display    Int       @default(1)
+}
+
+model study_abroad {
+  num        BigInt    @id(map: "idx_36796_primary") @default(autoincrement())
+  user_name  String    @default("") @db.VarChar(32)
+  email      String?   @db.VarChar(64)
+  user_pwd   String    @default("") @db.VarChar(20)
+  category   String?   @db.VarChar(255)
+  subject    String    @default("") @db.VarChar(128)
+  content    String?
+  reg_date   DateTime? @db.Timestamptz(6)
+  user_ip    String    @default("") @db.VarChar(16)
+  visit      Int       @default(0)
+  file_name1 String?   @default("1") @db.VarChar(100)
+  file_name2 String?   @default("none") @db.VarChar(100)
+  file_name3 String?   @default("none") @db.VarChar(100)
+}
+
+model teachers {
+  num        BigInt    @id(map: "idx_36811_primary") @default(autoincrement())
+  order_num  BigInt
+  name       String?   @db.VarChar(255)
+  profile    String
+  position   String
+  reg_date   DateTime? @db.Timestamptz(6)
+  file_name1 String?   @db.VarChar(100)
+}
+
+enum members_login_yb {
+  Y
+  N
+}
+
+enum members_status {
+  approved
+  pending
+}
+
+enum members_terms_condition {
+  on
+  off
+}
+
+enum members_userlevel {
+  LEVEL_1  @map("1")
+  LEVEL_12 @map("12")
+  LEVEL_20 @map("20")
+  LEVEL_80 @map("80")
+}

@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.spacer {
+  height: 100px;
+}
+
+@media (max-width: 768px) {
+  .spacer {
+    height: 50px;
+  }
+}

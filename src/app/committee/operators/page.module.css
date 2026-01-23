@@ -1,0 +1,270 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.subHeaderWrapper {
+  width: 100%;
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+.contentWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  padding: 0;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarPlaceholder {
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.mainContent {
+  flex: 1;
+  font-family: 'S-CoreDream';
+  padding: 30px 30px 40px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 30px 0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #d32f2f;
+  text-align: center;
+}
+
+.content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.operatorsList {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.operatorCard {
+  display: flex;
+  gap: 40px;
+  padding: 30px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.operatorImageSection {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: auto;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.operatorImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 400px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: #999;
+  font-size: 14px;
+}
+
+.operatorName {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.operatorInfoSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profileLine {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+/* 사이드바 접기/펼치기 (768px 이하) */
+@media (max-width: 768px) {
+  .subHeaderWrapper {
+    background-color: #e0e0e0;
+    width: 100%;
+  }
+
+  .subHeaderWrapper .contentWrapper {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .subHeaderWrapper .sidebarPlaceholder {
+    display: none;
+  }
+
+  .sidebarPlaceholder {
+    display: none;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    align-items: stretch;
+  }
+}
+
+/* 데스크톱 형식 유지 (500px 이상) - 이미지 크기 반응형 */
+@media (min-width: 500px) {
+  .operatorCard {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .operatorImageSection {
+    flex-shrink: 0;
+    width: clamp(200px, 25vw, 300px);
+  }
+
+  .imageWrapper {
+    width: 100%;
+  }
+
+  .imagePlaceholder {
+    height: clamp(266px, 33.33vw, 400px);
+  }
+}
+
+/* 큰 화면 (1200px 이상) */
+@media (min-width: 1200px) {
+  .operatorImageSection {
+    width: 300px;
+  }
+
+  .imagePlaceholder {
+    height: 400px;
+  }
+}
+
+/* 중간 화면 (900px ~ 1199px) */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .operatorImageSection {
+    width: 250px;
+  }
+
+  .imagePlaceholder {
+    height: 333px;
+  }
+}
+
+/* 작은 데스크톱 (500px ~ 899px) */
+@media (min-width: 500px) and (max-width: 899px) {
+  .operatorImageSection {
+    width: 200px;
+  }
+
+  .imagePlaceholder {
+    height: 266px;
+  }
+
+  .operatorCard {
+    gap: 30px;
+    padding: 25px;
+  }
+}
+
+/* 모바일 화면 (499px 이하) */
+@media (max-width: 499px) {
+  .mainContent {
+    padding: 20px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .operatorsList {
+    gap: 30px;
+  }
+
+  .operatorCard {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .operatorImageSection {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .imagePlaceholder {
+    height: 250px;
+  }
+
+  .operatorName {
+    font-size: 16px;
+  }
+
+  .profileLine {
+    font-size: 14px;
+  }
+}
