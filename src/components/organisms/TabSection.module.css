@@ -125,8 +125,8 @@
 
 .concertImage {
   flex-shrink: 0;
-  width: 300px;
-  height: 400px;
+  width: 200px;
+  height: 280px;
   position: relative;
   overflow: hidden;
   border-radius: 4px;
@@ -396,7 +396,7 @@
 
   .concertImage {
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
     height: auto;
     aspect-ratio: 3/4;
   }
