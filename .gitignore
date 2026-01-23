@@ -39,3 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# PowerShell scripts
+*.ps1
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation files (except README.md)
+*.md
+!README.md
+
+# SQL files
+*.sql
+
+# Database dump files
+*.dump

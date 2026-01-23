@@ -1,11 +1,13 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider        = "prisma-client-js"
+  output          = "../generated/prisma"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  schemas  = ["itmusic"]
 }
 
 model board_trustee {
@@ -16,6 +18,8 @@ model board_trustee {
   position   String
   reg_date   DateTime? @db.Timestamptz(6)
   file_name1 String?   @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model bottom_banner {
@@ -24,6 +28,8 @@ model bottom_banner {
   reg_date    DateTime? @db.Timestamptz(6)
   file_name1  String?   @db.VarChar(100)
   link        String?   @db.VarChar(255)
+
+  @@schema("itmusic")
 }
 
 model competition_winners_histry {
@@ -32,6 +38,8 @@ model competition_winners_histry {
   winners_list      String
   reg_date          DateTime? @db.Timestamptz(6)
   file_name1        String?   @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model concerts {
@@ -51,6 +59,8 @@ model concerts {
   file_name1       String?   @db.VarChar(100)
   file_name2       String?   @db.VarChar(100)
   file_name3       String?   @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model consultants {
@@ -61,6 +71,8 @@ model consultants {
   position   String
   reg_date   DateTime? @db.Timestamptz(6)
   file_name1 String?   @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model events {
@@ -81,6 +93,8 @@ model events {
   file_name1       String?   @db.VarChar(100)
   file_name2       String?   @db.VarChar(100)
   file_name3       String?   @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model italy_culture {
@@ -97,6 +111,8 @@ model italy_culture {
   file_name1 String?   @default("1") @db.VarChar(100)
   file_name2 String?   @default("none") @db.VarChar(100)
   file_name3 String?   @default("none") @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model itmusic_concour_intro {
@@ -104,6 +120,8 @@ model itmusic_concour_intro {
   subject  String    @default("") @db.VarChar(128)
   text     String?
   reg_date DateTime? @db.Timestamptz(6)
+
+  @@schema("itmusic")
 }
 
 model itmusic_director {
@@ -113,6 +131,8 @@ model itmusic_director {
   text       String?
   reg_date   DateTime? @db.Timestamptz(6)
   file_name1 String    @db.VarChar(128)
+
+  @@schema("itmusic")
 }
 
 model itmusic_history {
@@ -120,6 +140,8 @@ model itmusic_history {
   subject  String    @default("") @db.VarChar(128)
   text     String?
   reg_date DateTime? @db.Timestamptz(6)
+
+  @@schema("itmusic")
 }
 
 model itmusic_introduction {
@@ -127,6 +149,8 @@ model itmusic_introduction {
   subject  String    @default("") @db.VarChar(128)
   text     String?
   reg_date DateTime? @db.Timestamptz(6)
+
+  @@schema("itmusic")
 }
 
 model itmusic_president {
@@ -136,6 +160,8 @@ model itmusic_president {
   text       String?
   reg_date   DateTime? @db.Timestamptz(6)
   file_name1 String    @db.VarChar(128)
+
+  @@schema("itmusic")
 }
 
 model itmusic_purpose {
@@ -143,6 +169,8 @@ model itmusic_purpose {
   subject  String    @default("") @db.VarChar(128)
   text     String?
   reg_date DateTime? @db.Timestamptz(6)
+
+  @@schema("itmusic")
 }
 
 model member_video {
@@ -151,6 +179,8 @@ model member_video {
   text     String?
   link     String?   @db.VarChar(255)
   reg_date DateTime? @db.Timestamptz(6)
+
+  @@schema("itmusic")
 }
 
 model members {
@@ -183,7 +213,7 @@ model members {
   state                  String?                  @db.VarChar(5)
   job                    String?                  @db.VarChar(128)
   signdate               DateTime?                @db.Timestamptz(6)
-  userlevel              members_userlevel?       @default(dbgenerated("1"))
+  userlevel              members_userlevel?       @default(LEVEL_1)
   membership_fee_paydate DateTime                 @db.Timestamptz(6)
   login_yb               members_login_yb?
   email_preference1      String?                  @default("0") @db.VarChar(10)
@@ -191,6 +221,8 @@ model members {
   email_preference3      String?                  @default("0") @db.VarChar(10)
   terms_condition        members_terms_condition? @default(on)
   status                 members_status           @default(pending)
+
+  @@schema("itmusic")
 }
 
 model notice {
@@ -207,6 +239,8 @@ model notice {
   file_name1 String?   @default("1") @db.VarChar(100)
   file_name2 String?   @default("none") @db.VarChar(100)
   file_name3 String?   @default("none") @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model opr_mem {
@@ -217,6 +251,8 @@ model opr_mem {
   position   String    @db.VarChar(50)
   reg_date   DateTime? @db.Timestamptz(6)
   file_name1 String?   @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model slider {
@@ -229,6 +265,8 @@ model slider {
   link       String?   @db.VarChar(255)
   open_type  BigInt?
   display    Int       @default(1)
+
+  @@schema("itmusic")
 }
 
 model study_abroad {
@@ -245,6 +283,8 @@ model study_abroad {
   file_name1 String?   @default("1") @db.VarChar(100)
   file_name2 String?   @default("none") @db.VarChar(100)
   file_name3 String?   @default("none") @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 model teachers {
@@ -255,21 +295,29 @@ model teachers {
   position   String
   reg_date   DateTime? @db.Timestamptz(6)
   file_name1 String?   @db.VarChar(100)
+
+  @@schema("itmusic")
 }
 
 enum members_login_yb {
   Y
   N
+
+  @@schema("itmusic")
 }
 
 enum members_status {
   approved
   pending
+
+  @@schema("itmusic")
 }
 
 enum members_terms_condition {
   on
   off
+
+  @@schema("itmusic")
 }
 
 enum members_userlevel {
@@ -277,4 +325,6 @@ enum members_userlevel {
   LEVEL_12 @map("12")
   LEVEL_20 @map("20")
   LEVEL_80 @map("80")
+
+  @@schema("itmusic")
 }
