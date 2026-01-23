@@ -1,0 +1,143 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.subHeaderWrapper {
+  width: 100%;
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+.contentWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  padding: 0;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarPlaceholder {
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.mainContent {
+  flex: 1;
+  font-family: 'S-CoreDream';
+  padding: 30px 30px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 30px;
+  font-size: 14px;
+  color: #666;
+}
+
+.breadcrumbLink {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumbLink:hover {
+  color: #d32f2f;
+}
+
+.breadcrumbSeparator {
+  color: #999;
+}
+
+.breadcrumbCurrent {
+  color: #333;
+  font-weight: 500;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.titleUnderline {
+  width: 200px;
+  height: 4px;
+  background-color: #640a0a;
+  margin: 0 auto 30px auto;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+  margin: 0;
+  text-align: left;
+}
+
+/* 사이드바 접기/펼치기 (768px 이하) */
+@media (max-width: 768px) {
+  .subHeaderWrapper {
+    background-color: #e0e0e0;
+    width: 100%;
+  }
+
+  .subHeaderWrapper .contentWrapper {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .subHeaderWrapper .sidebarPlaceholder {
+    display: none;
+  }
+
+  .sidebarPlaceholder {
+    display: none;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    align-items: stretch;
+  }
+
+  .mainContent {
+    padding: 20px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .titleUnderline {
+    width: 150px;
+    height: 3px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
