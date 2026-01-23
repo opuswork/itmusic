@@ -336,8 +336,8 @@ function ConcertCompetitionBox() {
               <Image
                 src={imageUrl}
                 alt={currentConcert.subject || '공연소식'}
-                width={300}
-                height={400}
+                width={150}
+                height={200}
                 style={{ objectFit: 'cover' }}
                 unoptimized
               />
@@ -399,8 +399,8 @@ function ConcertCompetitionBox() {
               <Image
                 src={imageUrl}
                 alt={currentCompetition.subject || '콩쿠르'}
-                width={300}
-                height={400}
+                width={150}
+                height={200}
                 style={{ objectFit: 'cover' }}
                 unoptimized
               />
