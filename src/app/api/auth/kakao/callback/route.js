@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
-import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
@@ -112,19 +111,25 @@ export async function GET(request) {
     // 5. JWT 토큰 생성
     const token = generateToken(user);
 
-    // 6. 쿠키에 토큰 설정
-    const cookieStore = await cookies();
-    cookieStore.set('AccessToken', token, {
+    // 6. 리다이렉트 응답 생성 및 쿠키 설정
+    const response = NextResponse.redirect(`${FRONTEND_URL}/`);
+    response.cookies.set('AccessToken', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60,
+      maxAge: 7 * 24 * 60 * 60, // 7일
+      path: '/',
     });
 
-    // 7. 프론트엔드로 리다이렉트 (홈으로)
-    return NextResponse.redirect(`${FRONTEND_URL}/`);
+    return response;
   } catch (error) {
     console.error('Kakao callback error:', error);
+    console.error('Error stack:', error.stack);
+    console.error('Error details:', {
+      message: error.message,
+      name: error.name,
+      cause: error.cause,
+    });
     return NextResponse.redirect(`${FRONTEND_URL}/login?error=server_error`);
   }
 }
