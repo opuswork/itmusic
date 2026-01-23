@@ -16,6 +16,13 @@ export async function GET() {
       );
     }
 
+    // 디버깅: 로그 출력 (프로덕션에서는 제거 가능)
+    console.log('Kakao OAuth Debug:', {
+      clientId: KAKAO_CLIENT_ID?.substring(0, 10) + '...',
+      redirectUri: REDIRECT_URI,
+      backendUrl: BACKEND_URL,
+    });
+
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&prompt=login`;
 
     return NextResponse.redirect(KAKAO_AUTH_URL);
