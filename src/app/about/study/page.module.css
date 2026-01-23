@@ -58,36 +58,21 @@
     line-height: 1.8;
     color: #333;
   }
-  
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
 
   .content p {
-    margin: 0 auto 20px auto; /* Centered */
-    width: 100%;
-    max-width: 1200px;
+    margin: 0 0 20px 0;
   }
 
   /* 검색바 스타일 */
   .searchContainer {
-    margin: 30px auto 20px auto; /* Centered */
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
   }
 
   .searchForm {
     display: flex;
     gap: 10px;
     align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    justify-content: center; /* Centered */
   }
 
   .searchInput {
@@ -121,15 +106,8 @@
 
   /* 게시판 스타일 */
   .boardContainer {
-    margin-top: 20px;
+    margin-top: 40px;
     width: 100%;
-    max-width: 1200px;
-    margin-left: auto; /* Centered */
-    margin-right: auto; /* Centered */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   .studyTable {
@@ -336,7 +314,7 @@
     }
 
     .boardContainer {
-      width: 80%;
+      width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
