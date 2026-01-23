@@ -30,6 +30,12 @@ export default function Slider() {
         }
       } catch (error) {
         console.error('Error loading sliders:', error);
+        console.error('Error details:', {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status,
+          url: error.config?.url,
+        });
       } finally {
         setLoading(false);
       }
