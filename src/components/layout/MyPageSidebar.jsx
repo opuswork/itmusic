@@ -5,10 +5,10 @@ import { usePathname } from 'next/navigation';
 import styles from './MyPageSidebar.module.css';
 
 const myPageMenu = [
-  { label: '나의 프로파일일', href: '/mypage/profile' },
-  { label: '나의 연주영상', href: '/mypage/videos' },
-  { label: '좋아하는 영상', href: '/mypage/liked-videos' },
-  { label: '나의 연주사진', href: '/mypage/photos' },
+  { label: '나의 프로파일일', href: '#' },//, href: '/mypage/profile'
+  { label: '나의 연주영상', href: '#' },//, href: '/mypage/videos'
+  { label: '좋아하는 영상', href: '#' },//, href: '/mypage/liked-videos'
+  { label: '나의 연주사진', href: '#' },//, href: '/mypage/photos'
 ];
 
 export default function MyPageSidebar({ isCollapsed, onToggle, showExpandButton = false }) {
