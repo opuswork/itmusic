@@ -2,10 +2,10 @@
 
 import AdminLogin from "../_components/adminLogin";
 
-export default function AuthPage() {
+export default function LoginPage() {
   return (
     <>
-        <AdminLogin />
+      <AdminLogin />
     </>
   );
 }
