@@ -1,2 +1,11 @@
+# Node
+node_modules/
 
-/generated/prisma
+# Prisma
+generated/
+
+# Env
+.env
+
+# Logs
+logs/
