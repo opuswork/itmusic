@@ -5,17 +5,20 @@ import Nav from '@/components/layout/Nav';
 import MembershipSidebar from '@/components/layout/MembershipSidebar';
 import SubHeader from '@/components/layout/SubHeader';
 import Footer from '@/components/layout/Footer';
-import { useState, useEffect, useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './page.module.css';
 import adminStyles from '../dashboard-admin/page.module.css';
 
 export default function LoginPage() {
-  const searchParams = useSearchParams();
-  const isAdminMode = useMemo(() => searchParams.get('mode') === 'admin', [searchParams]);
-
+  const [isAdminMode, setIsAdminMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  // URL에서 ?mode=admin 확인 (클라이언트에서만, useSearchParams는 초기 렌더에서 비어 있을 수 있음)
+  useEffect(() => {
+    const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+    if (params.get('mode') === 'admin') setIsAdminMode(true);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
