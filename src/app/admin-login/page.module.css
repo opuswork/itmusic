@@ -1,0 +1,228 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.subHeaderWrapper {
+  width: 100%;
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+.contentWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  padding: 0;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 20px;
+}
+
+.sidebarPlaceholder {
+  margin-top: 0;
+  margin-left: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.mainContent {
+  flex: 1;
+  font-family: 'S-CoreDream', sans-serif;
+  padding: 30px 30px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ctt mem-wrap mem-icon */
+.ctt {
+  width: 100%;
+  max-width: 600px;
+}
+
+.memWrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.memIcon {
+  position: relative;
+}
+
+/* form.regist */
+.regist {
+  width: 100%;
+}
+
+/* fieldset.mem_box */
+.memBox {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 40px;
+  margin: 0;
+  background-color: #fff;
+}
+
+.memBox legend {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  padding: 0 12px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #640a0a;
+  width: 100%;
+  text-align: center;
+}
+
+/* ul.loginArea */
+.loginArea {
+  list-style: none;
+  margin: 0 0 20px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.loginArea li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.loginArea label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.loginArea input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-family: 'S-CoreDream', sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+}
+
+.loginArea input:focus {
+  outline: none;
+  border-color: #640a0a;
+}
+
+.loginArea input::placeholder {
+  color: #999;
+}
+
+.loginArea input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* button.mem_btn */
+.memBtn {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'S-CoreDream', sans-serif;
+  background-color: #640a0a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 8px;
+}
+
+.memBtn:hover:not(:disabled) {
+  background-color: #7a0d0d;
+}
+
+.memBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* div.m_btn */
+.mBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.mBtn a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'S-CoreDream', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.mBtn a:hover {
+  color: #640a0a;
+}
+
+.mBtn a span {
+  display: inline-block;
+}
+
+.errorMessage {
+  color: #d32f2f;
+  font-size: 14px;
+  font-family: 'S-CoreDream', sans-serif;
+  text-align: center;
+  padding: 10px;
+  background-color: #ffebee;
+  border-radius: 4px;
+  margin: 0 0 12px 0;
+}
+
+@media (max-width: 768px) {
+  .contentWrapper {
+    flex-direction: column;
+    padding: 0;
+    align-items: center;
+  }
+
+  .rightSection {
+    width: 100%;
+  }
+
+  .mainContent {
+    padding: 20px 16px 32px;
+    width: 100%;
+  }
+
+  .memBox {
+    padding: 24px 20px;
+  }
+
+  .memBox legend {
+    font-size: 20px;
+  }
+
+  .mBtn {
+    gap: 12px;
+  }
+}
