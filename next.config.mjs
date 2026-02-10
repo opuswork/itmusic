@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   devIndicators: false,
-  // Docker를 위한 standalone 빌드 출력
-  output: 'standalone',
+  // Docker 빌드일 때만 standalone 사용 (Vercel에서는 사용하지 않음)
+  ...(process.env.DOCKER_BUILD === 'true' && { output: 'standalone' }),
 };
 
 export default nextConfig;
