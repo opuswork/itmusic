@@ -3,6 +3,11 @@
   src: url('/fonts/SCDream3.otf') format('otf');
 }
 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
 * {
   margin: 0;
   padding: 0;
