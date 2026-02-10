@@ -18,7 +18,17 @@ function generateToken(user) {
 
 export async function POST(request) {
   try {
-    const { id, password } = await request.json();
+    const contentType = request.headers.get('content-type') || '';
+    let id, password;
+    if (contentType.includes('application/json')) {
+      const body = await request.json();
+      id = body.id;
+      password = body.password;
+    } else {
+      const formData = await request.formData();
+      id = formData.get('id');
+      password = formData.get('password');
+    }
 
     if (!id || !password) {
       return Response.json(
