@@ -5,10 +5,16 @@ import Nav from '@/components/layout/Nav';
 import MembershipSidebar from '@/components/layout/MembershipSidebar';
 import SubHeader from '@/components/layout/SubHeader';
 import Footer from '@/components/layout/Footer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import styles from './page.module.css';
+import adminStyles from '../dashboard-admin/page.module.css';
 
 export default function LoginPage() {
+  const searchParams = useSearchParams();
+  const isAdminMode = useMemo(() => searchParams.get('mode') === 'admin', [searchParams]);
+
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   useEffect(() => {
@@ -39,6 +45,63 @@ export default function LoginPage() {
     console.log('카카오 로그인 시작:', kakaoLoginUrl);
     window.location.href = kakaoLoginUrl;
   };
+
+  // Admin 로그인 (대시보드) – /login?mode=admin 으로 접근 (Vercel 404 회피용)
+  if (isAdminMode) {
+    return (
+      <div className={adminStyles.loginBox}>
+        <div className={adminStyles.card}>
+          <div className={adminStyles.cardHeader}>
+            <Link href="/dashboard" className={adminStyles.h1}>
+              <b>Admin Login</b>
+            </Link>
+          </div>
+          <div className={adminStyles.cardBody}>
+            <p className={adminStyles.loginBoxMsg}>Please login to start your session</p>
+            <form action="/api/auth/login" method="post">
+              <div className={adminStyles.inputGroup}>
+                <input
+                  type="text"
+                  name="id"
+                  className={adminStyles.formControl}
+                  placeholder="Username"
+                  required
+                  autoComplete="username"
+                />
+                <div className={adminStyles.inputGroupAppend}>
+                  <div className={adminStyles.inputGroupText}>
+                    <span className={adminStyles.fasFaEnvelope} />
+                  </div>
+                </div>
+              </div>
+              <div className={adminStyles.inputGroup}>
+                <input
+                  type="password"
+                  name="password"
+                  className={adminStyles.formControl}
+                  placeholder="Password"
+                  required
+                  autoComplete="current-password"
+                />
+                <div className={adminStyles.inputGroupAppend}>
+                  <div className={adminStyles.inputGroupText}>
+                    <span className={adminStyles.fasFaLock} />
+                  </div>
+                </div>
+              </div>
+              <div className={adminStyles.row}>
+                <div className={adminStyles.col4}>
+                  <button type="submit" className={adminStyles.btnPrimaryBtnBlock}>
+                    Sign In
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
