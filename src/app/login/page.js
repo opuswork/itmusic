@@ -5,19 +5,23 @@ import Nav from '@/components/layout/Nav';
 import MembershipSidebar from '@/components/layout/MembershipSidebar';
 import SubHeader from '@/components/layout/SubHeader';
 import Footer from '@/components/layout/Footer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import styles from './page.module.css';
-import adminStyles from '../dashboard-admin/page.module.css';
+
+// 클라이언트에서만 URL 확인 (빌드/SSR 시에는 false)
+function getIsAdminMode() {
+  if (typeof window === 'undefined') return false;
+  return new URLSearchParams(window.location.search).get('mode') === 'admin';
+}
 
 export default function LoginPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  // URL에서 ?mode=admin 확인 (클라이언트에서만, useSearchParams는 초기 렌더에서 비어 있을 수 있음)
-  useEffect(() => {
-    const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
-    if (params.get('mode') === 'admin') setIsAdminMode(true);
+  // URL ?mode=admin 확인 – 페인트 전에 실행해 멤버 로그인 깜빡임 방지
+  useLayoutEffect(() => {
+    if (getIsAdminMode()) setIsAdminMode(true);
   }, []);
 
   useEffect(() => {
@@ -49,52 +53,52 @@ export default function LoginPage() {
     window.location.href = kakaoLoginUrl;
   };
 
-  // Admin 로그인 (대시보드) – /login?mode=admin 으로 접근 (Vercel 404 회피용)
+  // Admin 로그인 (대시보드) – /login?mode=admin (스타일은 이 페이지 CSS에만 있음)
   if (isAdminMode) {
     return (
-      <div className={adminStyles.loginBox}>
-        <div className={adminStyles.card}>
-          <div className={adminStyles.cardHeader}>
-            <Link href="/dashboard" className={adminStyles.h1}>
+      <div className={styles.adminLoginBox}>
+        <div className={styles.adminCard}>
+          <div className={styles.adminCardHeader}>
+            <Link href="/dashboard" className={styles.adminH1}>
               <b>Admin Login</b>
             </Link>
           </div>
-          <div className={adminStyles.cardBody}>
-            <p className={adminStyles.loginBoxMsg}>Please login to start your session</p>
+          <div className={styles.adminCardBody}>
+            <p className={styles.adminLoginBoxMsg}>Please login to start your session</p>
             <form action="/api/auth/login" method="post">
-              <div className={adminStyles.inputGroup}>
+              <div className={styles.adminInputGroup}>
                 <input
                   type="text"
                   name="id"
-                  className={adminStyles.formControl}
+                  className={styles.adminFormControl}
                   placeholder="Username"
                   required
                   autoComplete="username"
                 />
-                <div className={adminStyles.inputGroupAppend}>
-                  <div className={adminStyles.inputGroupText}>
-                    <span className={adminStyles.fasFaEnvelope} />
+                <div className={styles.adminInputGroupAppend}>
+                  <div className={styles.adminInputGroupText}>
+                    <span aria-hidden>✉</span>
                   </div>
                 </div>
               </div>
-              <div className={adminStyles.inputGroup}>
+              <div className={styles.adminInputGroup}>
                 <input
                   type="password"
                   name="password"
-                  className={adminStyles.formControl}
+                  className={styles.adminFormControl}
                   placeholder="Password"
                   required
                   autoComplete="current-password"
                 />
-                <div className={adminStyles.inputGroupAppend}>
-                  <div className={adminStyles.inputGroupText}>
-                    <span className={adminStyles.fasFaLock} />
+                <div className={styles.adminInputGroupAppend}>
+                  <div className={styles.adminInputGroupText}>
+                    <span aria-hidden>🔒</span>
                   </div>
                 </div>
               </div>
-              <div className={adminStyles.row}>
-                <div className={adminStyles.col4}>
-                  <button type="submit" className={adminStyles.btnPrimaryBtnBlock}>
+              <div className={styles.adminRow}>
+                <div className={styles.adminCol4}>
+                  <button type="submit" className={styles.adminBtnPrimary}>
                     Sign In
                   </button>
                 </div>
