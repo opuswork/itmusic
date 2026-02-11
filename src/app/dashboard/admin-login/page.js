@@ -83,7 +83,7 @@ export default function AdminLoginPage() {
                   type="submit"
                   className={`${styles.btn} ${styles.btnPrimary}`}
                 >
-                  Sign In
+                  로그인
                 </button>
               </div>
             </form>
