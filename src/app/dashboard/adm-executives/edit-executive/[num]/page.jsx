@@ -240,17 +240,6 @@ export default function EditAdmExecutivePage() {
         <form onSubmit={handleSubmit} className={styles.form}>
           {error && <div className={styles.errorMessage}>{error}</div>}
           <div className={styles.formGroup}>
-            <label htmlFor="order_num" className={styles.label}>표시 순서</label>
-            <input
-              id="order_num"
-              type="number"
-              className={styles.input}
-              value={order_num}
-              onChange={(e) => setOrderNum(e.target.value)}
-              min={0}
-            />
-          </div>
-          <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>이름</label>
             <input
               id="name"
@@ -260,17 +249,6 @@ export default function EditAdmExecutivePage() {
               onChange={(e) => setName(e.target.value)}
               placeholder="이름"
               maxLength={255}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="position" className={styles.label}>직위</label>
-            <input
-              id="position"
-              type="text"
-              className={styles.input}
-              value={position}
-              onChange={(e) => setPosition(e.target.value)}
-              placeholder="직위"
             />
           </div>
           <div className={styles.formGroup}>
