@@ -14,6 +14,10 @@ function serializeBigInt(obj) {
     return obj.map(serializeBigInt);
   }
   
+  if (obj instanceof Date) {
+    return obj.toISOString();
+  }
+  
   if (typeof obj === 'object') {
     const result = {};
     for (const key in obj) {
@@ -63,6 +67,92 @@ async function getAll(req, res) {
   }
 }
 
+async function getOne(req, res) {
+  try {
+    const id = req.params.id;
+    const n = Number(id);
+    if (!Number.isInteger(n) || n < 1) {
+      return res.status(400).json({ success: false, message: 'Invalid executive id' });
+    }
+    const executive = await ExecutivesModel.findById(id);
+    if (!executive) {
+      return res.status(404).json({ success: false, message: '상임이사를 찾을 수 없습니다.' });
+    }
+    res.json({ success: true, data: serializeBigInt(executive) });
+  } catch (error) {
+    console.error('Error in getOne:', error);
+    res.status(500).json({
+      success: false,
+      message: '상임이사 조회 중 오류가 발생했습니다.',
+      error: error.message,
+    });
+  }
+}
+
+async function create(req, res) {
+  try {
+    const { order_num = 0, name = null, profile = '', position = '', file_name1 = null } = req.body;
+    const executive = await ExecutivesModel.create({ order_num, name, profile, position, file_name1 });
+    res.status(201).json({ success: true, data: serializeBigInt(executive) });
+  } catch (error) {
+    console.error('Error in create:', error);
+    res.status(500).json({
+      success: false,
+      message: '상임이사 등록 중 오류가 발생했습니다.',
+      error: error.message,
+    });
+  }
+}
+
+async function update(req, res) {
+  try {
+    const id = req.params.id;
+    const n = Number(id);
+    if (!Number.isInteger(n) || n < 1) {
+      return res.status(400).json({ success: false, message: 'Invalid executive id' });
+    }
+    const { order_num, name, profile, position, file_name1 } = req.body;
+    const executive = await ExecutivesModel.update(id, { order_num, name, profile, position, file_name1 });
+    res.json({ success: true, data: serializeBigInt(executive) });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({ success: false, message: '상임이사를 찾을 수 없습니다.' });
+    }
+    console.error('Error in update:', error);
+    res.status(500).json({
+      success: false,
+      message: '상임이사 수정 중 오류가 발생했습니다.',
+      error: error.message,
+    });
+  }
+}
+
+async function remove(req, res) {
+  try {
+    const id = req.params.id;
+    const n = Number(id);
+    if (!Number.isInteger(n) || n < 1) {
+      return res.status(400).json({ success: false, message: 'Invalid executive id' });
+    }
+    await ExecutivesModel.delete(id);
+    res.json({ success: true });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({ success: false, message: '상임이사를 찾을 수 없습니다.' });
+    }
+    console.error('Error in remove:', error);
+    res.status(500).json({
+      success: false,
+      message: '상임이사 삭제 중 오류가 발생했습니다.',
+      error: error.message,
+    });
+  }
+}
+
 export default {
   getAll,
+  getOne,
+  create,
+  update,
+  remove,
 };

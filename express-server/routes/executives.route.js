@@ -11,17 +11,13 @@ executivesRouter.use((req, res, next) => {
 executivesRouter
   .route("/")
   .get(ExecutivesController.getAll)
-  .post((req, res) => {
-    res.json({ message: "Executives 추가" });
-  });
+  .post(ExecutivesController.create);
 
 executivesRouter
   .route("/:id")
-  .patch((req, res) => {
-    res.json({ message: "Executives 수정" });
-  })
-  .delete((req, res) => {
-    res.json({ message: "Executives 삭제" });
-  });
+  .get(ExecutivesController.getOne)
+  .put(ExecutivesController.update)
+  .patch(ExecutivesController.update)
+  .delete(ExecutivesController.remove);
 
 export default executivesRouter;

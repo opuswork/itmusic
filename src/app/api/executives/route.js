@@ -1,6 +1,36 @@
 import { prisma } from '@/lib/prisma';
 import { serializeBigInt } from '@/lib/utils/serializeBigInt';
 
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const order_num = body.order_num != null ? Number(body.order_num) : 0;
+    const name = body.name != null ? String(body.name).slice(0, 255) : null;
+    const profile = String(body.profile ?? '');
+    const position = String(body.position ?? '');
+    const file_name1 = body.file_name1 != null && body.file_name1 !== '' ? String(body.file_name1).slice(0, 100) : null;
+
+    const executive = await prisma.board_trustee.create({
+      data: {
+        order_num: BigInt(order_num),
+        name,
+        profile,
+        position,
+        file_name1,
+      },
+    });
+
+    const serialized = serializeBigInt(executive);
+    return Response.json({ success: true, data: serialized });
+  } catch (error) {
+    console.error('Error in POST /api/executives:', error);
+    return Response.json(
+      { success: false, message: '상임이사 등록 중 오류가 발생했습니다.', error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
