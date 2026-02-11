@@ -11,17 +11,13 @@ studyRouter.use((req, res, next) => {
 studyRouter
   .route("/")
   .get(StudyController.getAll)
-  .post((req, res) => {
-    res.json({ message: "Study 추가" });
-  });
+  .post(StudyController.create);
 
 studyRouter
   .route("/:id")
-  .patch((req, res) => {
-    res.json({ message: "Study 수정" });
-  })
-  .delete((req, res) => {
-    res.json({ message: "Study 삭제" });
-  });
+  .get(StudyController.getOne)
+  .put(StudyController.update)
+  .patch(StudyController.update)
+  .delete(StudyController.remove);
 
 export default studyRouter;
