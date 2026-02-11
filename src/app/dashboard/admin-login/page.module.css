@@ -1,0 +1,177 @@
+.wrapper {
+  min-height: 100vh;
+  background: #ecf0f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.loginBox {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.cardHeader {
+  background: #fff;
+  border-bottom: none;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  border-top: 3px solid #007bff;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #333;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.titleBold {
+  font-weight: 700;
+}
+
+.cardBody {
+  padding: 1.25rem 1.5rem;
+}
+
+.loginBoxMsg {
+  margin: 0 0 1.25rem;
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ced4da;
+  background: #fff;
+}
+
+.formControl {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background: #fff;
+  border: none;
+  outline: none;
+}
+
+.formControl::placeholder {
+  color: #6c757d;
+}
+
+.inputGroupAppend {
+  display: flex;
+}
+
+.inputGroupText {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #e9ecef;
+  border-left: 1px solid #ced4da;
+  color: #6c757d;
+}
+
+.inputGroupText svg {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.col8 {
+  flex: 1;
+  min-width: 0;
+}
+
+.col4 {
+  flex-shrink: 0;
+}
+
+.icheckPrimary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icheckPrimary input[type="checkbox"] {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  accent-color: #007bff;
+  cursor: pointer;
+}
+
+.icheckPrimary label {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #495057;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.btnBlock {
+  display: block;
+  width: 100%;
+}
+
+.btnPrimary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btnPrimary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
