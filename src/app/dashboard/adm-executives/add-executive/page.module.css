@@ -145,3 +145,42 @@
   background: #e9ecef;
   color: #495057;
 }
+
+.editorPlaceholder {
+  padding: 1rem;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+.fileInput {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.uploadStatus {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.imagePreview {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.previewImg {
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.previewName {
+  font-size: 0.875rem;
+  color: #495057;
+}
