@@ -44,7 +44,7 @@ export async function GET(request) {
       skip: skip,
       take: take,
       orderBy: {
-        num: 'asc',
+        num: 'desc',
       },
     });
 
