@@ -72,6 +72,92 @@ async function getAll(req, res) {
   }
 }
 
+async function getOne(req, res) {
+  try {
+    const id = req.params.id;
+    const n = Number(id);
+    if (!Number.isInteger(n) || n < 1) {
+      return res.status(400).json({ success: false, message: 'Invalid video id' });
+    }
+    const video = await VideoModel.findById(id);
+    if (!video) {
+      return res.status(404).json({ success: false, message: '영상을 찾을 수 없습니다.' });
+    }
+    res.json({ success: true, data: serializeBigInt(video) });
+  } catch (error) {
+    console.error('Error in getOne:', error);
+    res.status(500).json({
+      success: false,
+      message: '영상 조회 중 오류가 발생했습니다.',
+      error: error.message,
+    });
+  }
+}
+
+async function create(req, res) {
+  try {
+    const { subject = '', text = null, link = null } = req.body;
+    const video = await VideoModel.create({ subject, text, link });
+    res.status(201).json({ success: true, data: serializeBigInt(video) });
+  } catch (error) {
+    console.error('Error in create:', error);
+    res.status(500).json({
+      success: false,
+      message: '영상 등록 중 오류가 발생했습니다.',
+      error: error.message,
+    });
+  }
+}
+
+async function update(req, res) {
+  try {
+    const id = req.params.id;
+    const n = Number(id);
+    if (!Number.isInteger(n) || n < 1) {
+      return res.status(400).json({ success: false, message: 'Invalid video id' });
+    }
+    const { subject, text, link } = req.body;
+    const video = await VideoModel.update(id, { subject, text, link });
+    res.json({ success: true, data: serializeBigInt(video) });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({ success: false, message: '영상을 찾을 수 없습니다.' });
+    }
+    console.error('Error in update:', error);
+    res.status(500).json({
+      success: false,
+      message: '영상 수정 중 오류가 발생했습니다.',
+      error: error.message,
+    });
+  }
+}
+
+async function remove(req, res) {
+  try {
+    const id = req.params.id;
+    const n = Number(id);
+    if (!Number.isInteger(n) || n < 1) {
+      return res.status(400).json({ success: false, message: 'Invalid video id' });
+    }
+    await VideoModel.delete(id);
+    res.json({ success: true });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({ success: false, message: '영상을 찾을 수 없습니다.' });
+    }
+    console.error('Error in remove:', error);
+    res.status(500).json({
+      success: false,
+      message: '영상 삭제 중 오류가 발생했습니다.',
+      error: error.message,
+    });
+  }
+}
+
 export default {
   getAll,
+  getOne,
+  create,
+  update,
+  remove,
 };

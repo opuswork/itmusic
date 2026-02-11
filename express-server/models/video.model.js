@@ -52,4 +52,68 @@ export default {
       throw error;
     }
   },
+
+  async findById(id) {
+    try {
+      const num = BigInt(id);
+      const video = await prisma.member_video.findUnique({
+        where: { num },
+        select: {
+          num: true,
+          subject: true,
+          text: true,
+          link: true,
+          reg_date: true,
+        },
+      });
+      return video;
+    } catch (error) {
+      console.error('Error finding video by id:', error);
+      throw error;
+    }
+  },
+
+  async create(data) {
+    try {
+      const video = await prisma.member_video.create({
+        data: {
+          subject: String(data.subject ?? '').slice(0, 128),
+          text: data.text != null ? String(data.text) : null,
+          link: data.link != null && data.link !== '' ? String(data.link).slice(0, 255) : null,
+        },
+      });
+      return video;
+    } catch (error) {
+      console.error('Error creating video:', error);
+      throw error;
+    }
+  },
+
+  async update(id, data) {
+    try {
+      const num = BigInt(id);
+      const updateData = {};
+      if (data.subject !== undefined) updateData.subject = String(data.subject).slice(0, 128);
+      if (data.text !== undefined) updateData.text = data.text != null ? String(data.text) : null;
+      if (data.link !== undefined) updateData.link = data.link != null && data.link !== '' ? String(data.link).slice(0, 255) : null;
+      const video = await prisma.member_video.update({
+        where: { num },
+        data: updateData,
+      });
+      return video;
+    } catch (error) {
+      console.error('Error updating video:', error);
+      throw error;
+    }
+  },
+
+  async delete(id) {
+    try {
+      const num = BigInt(id);
+      await prisma.member_video.delete({ where: { num } });
+    } catch (error) {
+      console.error('Error deleting video:', error);
+      throw error;
+    }
+  },
 };
