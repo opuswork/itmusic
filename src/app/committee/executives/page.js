@@ -174,9 +174,9 @@ export default function ExecutivesPage() {
                           {executive.name && (
                             <p className={styles.executiveName}>{executive.name}</p>
                           )}
-                          {executive.position && (
-                            <p className={styles.executivePosition}>{executive.position}</p>
-                          )}
+                          <p className={styles.executivePosition}>
+                            {executive.position?.trim() || '상임이사'}
+                          </p>
                         </div>
                         <div className={styles.executiveInfoSection}>
                           {profileLines.length > 0 && (
