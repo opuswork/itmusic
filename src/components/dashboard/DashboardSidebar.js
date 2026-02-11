@@ -7,6 +7,7 @@ import { useState } from 'react';
 import styles from './DashboardSidebar.module.css';
 
 const menuItems = [
+  { href: '/dashboard/adm-slide', label: '슬라이드' },
   { href: '/dashboard/adm-video', label: '협회원연주영상' },
   { href: '/dashboard/adm-culture', label: '이탈리아문화산책' },
   { href: '/dashboard/adm-study', label: '유학정보' },
