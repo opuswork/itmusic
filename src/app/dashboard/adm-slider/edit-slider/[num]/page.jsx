@@ -6,15 +6,6 @@ import { useRouter, useParams } from 'next/navigation';
 import { http } from '@/lib/http/client';
 import styles from '@/app/dashboard/adm-slider/add-slider/page.module.css';
 
-function convertFileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
 export default function EditAdmSliderPage() {
   const router = useRouter();
   const params = useParams();
@@ -87,12 +78,16 @@ export default function EditAdmSliderPage() {
     try {
       let finalFile_name1 = file_name1;
       let finalOriginalFileName = originalFileName;
-      
+
       if (selectedFile) {
-        // Convert new file to base64
-        const base64String = await convertFileToBase64(selectedFile);
-        finalFile_name1 = base64String;
-        finalOriginalFileName = selectedFile.name;
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+        formData.append('originalFileNameBase64', btoa(unescape(encodeURIComponent(selectedFile.name))));
+        const uploadRes = await fetch('/api/upload/slider', { method: 'POST', body: formData });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadData.message || '이미지 업로드에 실패했습니다.');
+        finalFile_name1 = uploadData.filename;
+        finalOriginalFileName = uploadData.originalFileName ?? selectedFile.name;
       }
 
       await http.put(`/sliders/${num}`, {
@@ -113,9 +108,7 @@ export default function EditAdmSliderPage() {
   };
 
   const existingImageUrl = file_name1
-    ? (file_name1.startsWith('http') || file_name1.startsWith('data:') 
-        ? file_name1 
-        : `/assets/sliderImages/${file_name1}`)
+    ? (file_name1.startsWith('http') ? file_name1 : `/assets/sliderImages/${file_name1}`)
     : null;
 
   const displayPreviewUrl = previewUrl || existingImageUrl;
@@ -187,9 +180,9 @@ export default function EditAdmSliderPage() {
               disabled={saving}
             />
             <p className={styles.uploadHint}>
-              {selectedFile 
-                ? '새 이미지를 선택했습니다. 저장 시 base64로 인코딩되어 저장됩니다.'
-                : '새 이미지를 선택하면 기존 이미지가 대체됩니다. 저장 시 base64로 인코딩되어 저장됩니다.'}
+              {selectedFile
+                ? '새 이미지를 선택했습니다. 저장 시 서버에 업로드됩니다.'
+                : '새 이미지를 선택하면 기존 이미지가 대체됩니다. 저장 시 서버에 업로드됩니다.'}
             </p>
             {displayPreviewUrl && (
               <div className={styles.imagePreview}>

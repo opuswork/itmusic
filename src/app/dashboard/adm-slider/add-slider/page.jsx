@@ -6,15 +6,6 @@ import { useRouter } from 'next/navigation';
 import { http } from '@/lib/http/client';
 import styles from './page.module.css';
 
-function convertFileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
 export default function AddAdmSliderPage() {
   const router = useRouter();
   const fileInputRef = useRef(null);
@@ -59,12 +50,20 @@ export default function AddAdmSliderPage() {
     try {
       let file_name1 = null;
       let originalFileName = null;
-      
+
       if (selectedFile) {
-        // Convert file to base64
-        const base64String = await convertFileToBase64(selectedFile);
-        file_name1 = base64String;
-        originalFileName = selectedFile.name;
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+        // Send original file name as base64 to prevent filename injection / encoding issues
+        formData.append('originalFileNameBase64', btoa(unescape(encodeURIComponent(selectedFile.name))));
+        const uploadRes = await fetch('/api/upload/slider', {
+          method: 'POST',
+          body: formData,
+        });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadData.message || '이미지 업로드에 실패했습니다.');
+        file_name1 = uploadData.filename;
+        originalFileName = uploadData.originalFileName ?? selectedFile.name;
       }
 
       await http.post('/sliders', {
@@ -135,7 +134,7 @@ export default function AddAdmSliderPage() {
               onChange={handleFileChange}
               disabled={saving}
             />
-            <p className={styles.uploadHint}>이미지를 선택하면 미리보기가 표시됩니다. 저장 시 base64로 인코딩되어 저장됩니다.</p>
+            <p className={styles.uploadHint}>이미지를 선택하면 미리보기가 표시됩니다. 저장 시 서버에 업로드됩니다.</p>
             {displayPreviewUrl && (
               <div className={styles.imagePreview}>
                 <img
