@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../express-server/generated/prisma/index.js';
+import { PrismaClient } from '@prisma/client';
 
 // Prisma 클라이언트 싱글톤 패턴
 const globalForPrisma = globalThis;

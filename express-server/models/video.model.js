@@ -1,5 +1,5 @@
 // Prisma, postgres 연동 로직, 데이터 스키마 정의
-import { PrismaClient } from "../generated/prisma/index.js";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient({
   log: ['query', 'error', 'warn'],
