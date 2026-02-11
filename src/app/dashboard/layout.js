@@ -1,12 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import DashboardNavbar from '@/components/dashboard/DashboardNavbar';
 import DashboardSidebar from '@/components/dashboard/DashboardSidebar';
 import styles from './layout.module.css';
 
 export default function DashboardLayout({ children }) {
+  const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const isAdminLogin = pathname?.endsWith('/admin-login');
+
+  if (isAdminLogin) {
+    return <>{children}</>;
+  }
 
   return (
     <div className={styles.wrapper}>
