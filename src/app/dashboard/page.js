@@ -6,9 +6,6 @@ import styles from './page.module.css';
 function ProductCard({ title = 'Products' }) {
   const rows = [
     { name: 'Some Product', price: '$13 USD', change: '12%', up: true, sold: '12,000 Sold' },
-    { name: 'Another Product', price: '$29 USD', change: '0.5%', up: false, sold: '123,234 Sold' },
-    { name: 'Amazing Product', price: '$1,230 USD', change: '3%', up: false, sold: '198 Sold' },
-    { name: 'Perfect Item', price: '$199 USD', change: '63%', up: true, sold: '87 Sold', badge: 'NEW' },
   ];
 
   return (
