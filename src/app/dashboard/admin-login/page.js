@@ -32,12 +32,10 @@ export default function AdminLoginPage() {
       <div className={styles.loginBox}>
         <div className={styles.card}>
           <div className={styles.cardHeader}>
-            <a href="/dashboard" className={styles.title}>
               <span className={styles.titleBold}>이탈리아음악협회 관리자 로그인</span>
-            </a>
           </div>
           <div className={styles.cardBody}>
-            <p className={styles.loginBoxMsg}>Sign in to start your session</p>
+            <p className={styles.loginBoxMsg}>로그인을 시작하세요</p>
 
             <form method="post" className={styles.form}>
               <div className={styles.inputGroup}>
