@@ -1,6 +1,36 @@
 import { prisma } from '@/lib/prisma';
 import { serializeBigInt } from '@/lib/utils/serializeBigInt';
 
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const { subject = '', content = null, category = null } = body;
+
+    const study = await prisma.study_abroad.create({
+      data: {
+        user_name: 'admin',
+        user_pwd: '',
+        user_ip: '0.0.0.0',
+        subject: String(subject).slice(0, 128),
+        content: content != null ? String(content) : null,
+        category: category != null ? String(category).slice(0, 255) : null,
+        file_name1: '1',
+        file_name2: 'none',
+        file_name3: 'none',
+      },
+    });
+
+    const serialized = serializeBigInt(study);
+    return Response.json({ success: true, data: serialized });
+  } catch (error) {
+    console.error('Error in POST /api/studies:', error);
+    return Response.json(
+      { success: false, message: '유학정보 게시물 등록 중 오류가 발생했습니다.', error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -14,6 +44,7 @@ export async function GET(request) {
         num: true,
         subject: true,
         content: true,
+        category: true,
         reg_date: true,
         visit: true,
         file_name1: true,
