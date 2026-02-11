@@ -1,3 +1,17 @@
+.authChecking {
+  min-height: 100vh;
+  background: #f4f6f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authChecking p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
 .wrapper {
   min-height: 100vh;
   background: #f4f6f9;
