@@ -1,6 +1,30 @@
 import { prisma } from '@/lib/prisma';
 import { serializeBigInt } from '@/lib/utils/serializeBigInt';
 
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const { subject = '', text = null, link = null } = body;
+
+    const video = await prisma.member_video.create({
+      data: {
+        subject: String(subject).slice(0, 128),
+        text: text != null ? String(text) : null,
+        link: link != null && link !== '' ? String(link).slice(0, 255) : null,
+      },
+    });
+
+    const serialized = serializeBigInt(video);
+    return Response.json({ success: true, data: serialized });
+  } catch (error) {
+    console.error('Error in POST /api/videos:', error);
+    return Response.json(
+      { success: false, message: '영상 등록 중 오류가 발생했습니다.', error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);

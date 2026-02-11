@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import Link from 'next/link';
 import { http } from '@/lib/http/client';
 import styles from './page.module.css';
 
@@ -10,6 +11,7 @@ export default function AdmVideoPage() {
   const [hasMore, setHasMore] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deletingNum, setDeletingNum] = useState(null);
   const observerRef = useRef(null);
   const loadingRef = useRef(null);
   const isLoadingRef = useRef(false);
@@ -84,11 +86,28 @@ export default function AdmVideoPage() {
     setSelectedVideo(null);
   };
 
+  const handleDelete = async (num) => {
+    if (!confirm('이 영상을 삭제하시겠습니까?')) return;
+    setDeletingNum(num);
+    try {
+      await http.delete(`/videos/${num}`);
+      setVideos((prev) => prev.filter((v) => String(v.num) !== String(num)));
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || '삭제에 실패했습니다.');
+    } finally {
+      setDeletingNum(null);
+    }
+  };
+
   return (
     <>
       <div className={styles.contentHeader}>
         <div className={styles.contentHeaderInner}>
           <h1 className={styles.pageTitle}>관리자 영상</h1>
+          <Link href="/dashboard/adm-video/add-video" className={styles.addVideoButton}>
+            동영상 올리기
+          </Link>
         </div>
       </div>
 
@@ -100,13 +119,14 @@ export default function AdmVideoPage() {
                 <th>회원이름</th>
                 <th>설명</th>
                 <th>영상링크</th>
+                <th className={styles.thActions}>관리</th>
               </tr>
             </thead>
             <tbody>
               {videos.map((video) => (
                 <tr key={video.num?.toString() ?? video.link ?? Math.random()}>
                   <td>{video.subject || '-'}</td>
-                  <td>{video.text || '-'}</td>
+                  <td className={styles.tdDescription}>{video.text ? String(video.text).replace(/<[^>]*>/g, '').slice(0, 80) : '-'}{video.text && String(video.text).length > 80 ? '…' : ''}</td>
                   <td>
                     {video.link ? (
                       <button
@@ -131,6 +151,20 @@ export default function AdmVideoPage() {
                     ) : (
                       '-'
                     )}
+                  </td>
+                  <td className={styles.tdActions}>
+                    <Link href={`/dashboard/adm-video/edit-video/${video.num}`} className={styles.editButton}>
+                      수정
+                    </Link>
+                    <button
+                      type="button"
+                      className={styles.deleteButton}
+                      onClick={() => handleDelete(video.num)}
+                      disabled={deletingNum === video.num}
+                      aria-label="삭제"
+                    >
+                      {deletingNum === video.num ? '삭제 중...' : '삭제'}
+                    </button>
                   </td>
                 </tr>
               ))}
