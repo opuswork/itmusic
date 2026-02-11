@@ -112,7 +112,6 @@ export default function AdmExecutivesPage() {
             <thead>
               <tr>
                 <th className={styles.thNum}>번호</th>
-                <th className={styles.thOrder}>순서</th>
                 <th>이름</th>
                 <th>직위</th>
                 <th className={styles.thProfile}>프로필</th>
@@ -124,7 +123,6 @@ export default function AdmExecutivesPage() {
               {executives.map((exec) => (
                 <tr key={exec.num?.toString() ?? Math.random()}>
                   <td className={styles.tdNum}>{exec.num ?? '-'}</td>
-                  <td className={styles.tdOrder}>{exec.order_num ?? '-'}</td>
                   <td>
                     <button
                       type="button"
