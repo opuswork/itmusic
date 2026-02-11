@@ -54,7 +54,7 @@ export async function GET(request) {
       skip: skip,
       take: take,
       orderBy: {
-        order_num: 'asc',
+        num: 'asc',
       },
     });
 
