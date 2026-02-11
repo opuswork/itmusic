@@ -1,16 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import styles from './page.module.css';
 
 const EnvelopeIcon = () => (
   <svg className={styles.socialIcon} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
     <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-  </svg>
-);
-
-const LockIcon = () => (
-  <svg className={styles.socialIcon} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
   </svg>
 );
 
@@ -30,13 +25,15 @@ const GoogleIcon = () => (
 );
 
 export default function AdminLoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.loginBox}>
         <div className={styles.card}>
           <div className={styles.cardHeader}>
             <a href="/dashboard" className={styles.title}>
-              <span className={styles.titleBold}>Admin</span>LTE
+              <span className={styles.titleBold}>이탈리아음악협회 관리자 로그인</span>
             </a>
           </div>
           <div className={styles.cardBody}>
@@ -59,33 +56,35 @@ export default function AdminLoginPage() {
               </div>
               <div className={styles.inputGroup}>
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   className={styles.formControl}
                   placeholder="Password"
                   name="password"
                   autoComplete="current-password"
                 />
                 <div className={styles.inputGroupAppend}>
-                  <div className={styles.inputGroupText}>
-                    <LockIcon />
-                  </div>
-                </div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.col8}>
-                  <div className={styles.icheckPrimary}>
-                    <input type="checkbox" id="remember" name="remember" />
-                    <label htmlFor="remember">Remember Me</label>
-                  </div>
-                </div>
-                <div className={styles.col4}>
                   <button
-                    type="submit"
-                    className={`${styles.btn} ${styles.btnPrimary} ${styles.btnBlock}`}
+                    type="button"
+                    className={styles.inputGroupText}
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    tabIndex={-1}
                   >
-                    Sign In
+                    <img
+                      src={showPassword ? '/assets/icons/ic_eye_on.svg' : '/assets/icons/ic_eye_off.svg'}
+                      alt=""
+                      className={styles.passwordToggleIcon}
+                    />
                   </button>
                 </div>
+              </div>
+              <div className={styles.rowCenter}>
+                <button
+                  type="submit"
+                  className={`${styles.btn} ${styles.btnPrimary}`}
+                >
+                  Sign In
+                </button>
               </div>
             </form>
           </div>

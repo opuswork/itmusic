@@ -104,12 +104,31 @@
   display: block;
 }
 
+button.inputGroupText {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
+}
+
+.passwordToggleIcon {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.rowCenter {
+  display: flex;
+  justify-content: center;
   margin-top: 0.25rem;
 }
 
