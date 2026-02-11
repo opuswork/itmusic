@@ -18,7 +18,8 @@ function generateToken(user) {
 
 export async function POST(request) {
   try {
-    const { id, password } = await request.json();
+    const body = await request.json();
+    const { id, password, admin: isAdminLogin } = body;
 
     if (!id || !password) {
       return Response.json(
@@ -53,6 +54,17 @@ export async function POST(request) {
           message: '아이디 또는 비밀번호가 올바르지 않습니다.',
         },
         { status: 401 }
+      );
+    }
+
+    // 관리자 로그인인 경우 username이 'admin'인 회원만 허용 (members 테이블)
+    if (isAdminLogin && user.username !== 'admin') {
+      return Response.json(
+        {
+          success: false,
+          message: '관리자(admin) 계정으로만 로그인할 수 있습니다.',
+        },
+        { status: 403 }
       );
     }
 

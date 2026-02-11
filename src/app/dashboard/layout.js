@@ -1,19 +1,57 @@
 'use client';
 
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { getCurrentUser } from '@/lib/auth/auth';
 import DashboardNavbar from '@/components/dashboard/DashboardNavbar';
 import DashboardSidebar from '@/components/dashboard/DashboardSidebar';
 import styles from './layout.module.css';
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const isAdminLogin = pathname?.endsWith('/admin-login');
 
+  useEffect(() => {
+    if (isAdminLogin) {
+      setAuthChecked(true);
+      return;
+    }
+    let cancelled = false;
+    getCurrentUser()
+      .then((data) => {
+        if (cancelled) return;
+        const ok = data?.isAuthenticated === true && data?.user?.username === 'admin';
+        setIsAdmin(ok);
+        setAuthChecked(true);
+        if (!ok) {
+          router.replace('/dashboard/admin-login');
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setAuthChecked(true);
+          setIsAdmin(false);
+          router.replace('/dashboard/admin-login');
+        }
+      });
+    return () => { cancelled = true; };
+  }, [isAdminLogin, router]);
+
   if (isAdminLogin) {
     return <>{children}</>;
+  }
+
+  if (!authChecked || !isAdmin) {
+    return (
+      <div className={styles.authChecking}>
+        <p>확인 중...</p>
+      </div>
+    );
   }
 
   return (
