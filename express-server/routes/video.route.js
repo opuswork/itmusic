@@ -11,17 +11,13 @@ videoRouter.use((req, res, next) => {
 videoRouter
   .route("/")
   .get(VideoController.getAll)
-  .post((req, res) => {
-    res.json({ message: "Video 추가" });
-  });
+  .post(VideoController.create);
 
 videoRouter
   .route("/:id")
-  .patch((req, res) => {
-    res.json({ message: "Video 수정" });
-  })
-  .delete((req, res) => {
-    res.json({ message: "Video 삭제" });
-  });
+  .get(VideoController.getOne)
+  .put(VideoController.update)
+  .patch(VideoController.update)
+  .delete(VideoController.remove);
 
 export default videoRouter;

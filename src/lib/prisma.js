@@ -1,4 +1,5 @@
-import { PrismaClient } from '../../express-server/generated/prisma/index.js';
+// Use generated client (postinstall runs prisma generate → node_modules/.prisma/client)
+import { PrismaClient } from '.prisma/client';
 
 // Prisma 클라이언트 싱글톤 패턴
 const globalForPrisma = globalThis;
