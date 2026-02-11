@@ -1,0 +1,94 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1029;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background: #fff;
+  border-bottom: 1px solid #dee2e6;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.navbarSidebarExpanded {
+  margin-left: 250px;
+}
+
+.navbarSidebarCollapsed {
+  margin-left: 0;
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1.25rem;
+}
+
+.toggleBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+.navLink {
+  padding: 0.5rem 0.75rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-radius: 4px;
+}
+
+.navLink:hover {
+  color: #000;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.searchBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.searchBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+@media (max-width: 991.98px) {
+  .navbarSidebarExpanded {
+    margin-left: 0;
+  }
+}

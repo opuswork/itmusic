@@ -1,0 +1,185 @@
+.contentHeader {
+  padding: 1rem 1.5rem;
+  background: #f4f6f9;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.contentHeaderInner {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.containerFluid {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0.75rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -0.75rem;
+}
+
+.colLg6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 991.98px) {
+  .colLg6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125);
+  margin-bottom: 1.5rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  background: transparent;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.cardTools {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.cardToolBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #6c757d;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.cardToolBtn:hover {
+  color: #333;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.cardBody {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+  background: #f8f9fa;
+}
+
+.table tbody td {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #333;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.tableProduct {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tableProductImg {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #dee2e6;
+}
+
+.textSuccess {
+  color: #28a745;
+}
+
+.textWarning {
+  color: #ffc107;
+}
+
+.textDanger {
+  color: #dc3545;
+}
+
+.textMuted {
+  color: #6c757d;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.textMuted:hover {
+  color: #333;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+.badgeDanger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.mr1 {
+  margin-right: 0.25rem;
+}
