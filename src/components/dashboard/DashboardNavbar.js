@@ -1,11 +1,24 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { logout } from '@/lib/auth/auth';
 import styles from './DashboardNavbar.module.css';
 
 export default function DashboardNavbar({ sidebarOpen, onToggleSidebar }) {
   const [searchOpen, setSearchOpen] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push('/dashboard/admin-login');
+      router.refresh();
+    } catch (error) {
+      console.error('로그아웃 실패:', error);
+    }
+  };
 
   return (
     <nav
@@ -29,6 +42,14 @@ export default function DashboardNavbar({ sidebarOpen, onToggleSidebar }) {
       </div>
 
       <div className={styles.navRight}>
+        <button
+          type="button"
+          className={styles.logoutBtn}
+          onClick={handleLogout}
+          aria-label="로그아웃"
+        >
+          로그아웃
+        </button>
         <button
           type="button"
           className={styles.searchBtn}
