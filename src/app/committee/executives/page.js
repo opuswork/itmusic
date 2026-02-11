@@ -111,9 +111,10 @@ export default function ExecutivesPage() {
     return profile.split('\n').filter(line => line.trim());
   };
 
-  // 이미지 URL 생성
+  // 이미지 URL 생성 (Vercel Blob 전체 URL이면 그대로, 아니면 /assets/people/ 경로)
   const getImageUrl = (fileName) => {
     if (!fileName || fileName === 'none' || fileName === '1') return null;
+    if (fileName.startsWith('http')) return fileName;
     return `/assets/people/${fileName}`;
   };
 
