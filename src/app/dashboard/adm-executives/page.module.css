@@ -1,13 +1,252 @@
-.container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+.contentHeader {
+  padding: 1rem 1.5rem;
+  background: #f4f6f9;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.contentHeaderInner {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.addButton {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  background: #007bff;
+  border-radius: 4px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.addButton:hover {
+  background: #0069d9;
+  color: #fff;
 }
 
 .content {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  padding: 1.5rem;
+}
+
+.boardContainer {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125);
+  overflow-x: auto;
+}
+
+.execTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
+}
+
+.execTable thead {
+  background-color: #f8f9fa;
+}
+
+.execTable th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.execTable td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  color: #333;
+  font-size: 0.875rem;
+  vertical-align: middle;
+}
+
+.execTable tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.execTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.thNum { width: 60px; text-align: center; }
+.thOrder { width: 60px; text-align: center; }
+.thProfile { max-width: 200px; }
+.thFile { width: 100px; }
+.thActions { width: 120px; text-align: center; }
+
+.tdNum { text-align: center; }
+.tdOrder { text-align: center; }
+.tdProfile {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #666;
+}
+.tdFile { color: #666; font-size: 0.8125rem; }
+.tdActions { white-space: nowrap; }
+
+.nameButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  color: #007bff;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.nameButton:hover {
+  color: #0056b3;
+}
+
+.editButton {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.35rem;
+  font-size: 0.8125rem;
+  color: #007bff;
+  background: transparent;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.editButton:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+.deleteButton {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+  color: #dc3545;
+  background: transparent;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteButton:hover:not(:disabled) {
+  background: #dc3545;
+  color: #fff;
+}
+
+.deleteButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.loadingIndicator {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1001;
+}
+
+.modalCloseButton:hover {
+  background-color: #b71c1c;
+}
+
+.modalBody {
+  padding: 24px;
+}
+
+.modalTitle {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.modalPosition {
+  margin: 0 0 12px 0;
+  font-size: 0.9375rem;
+  color: #666;
+}
+
+.modalProfile {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.modalProfile p {
+  margin: 0 0 6px 0;
+}
+
+.modalFile {
+  margin-top: 12px;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.modalEmpty {
+  color: #999;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .execTable th,
+  .execTable td {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.8125rem;
+  }
+  .thProfile,
+  .tdProfile { max-width: 120px; }
 }
