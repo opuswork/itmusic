@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
 import { http } from '@/lib/http/client';
-import styles from '../add-video/page.module.css';
+import styles from '@/app/dashboard/adm-video/add-video/page.module.css';
 
 const SUMMERNOTE_CDN = {
   jQuery: 'https://code.jquery.com/jquery-3.6.0.min.js',
