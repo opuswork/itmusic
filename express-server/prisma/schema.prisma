@@ -11,13 +11,14 @@ datasource db {
 }
 
 model board_trustee {
-  num        BigInt    @id(map: "idx_36628_primary") @default(autoincrement())
-  order_num  BigInt
-  name       String?   @db.VarChar(255)
-  profile    String
-  position   String
-  reg_date   DateTime? @db.Timestamptz(6)
-  file_name1 String?   @db.VarChar(100)
+  num               BigInt    @id(map: "idx_36628_primary") @default(autoincrement())
+  order_num         BigInt
+  name              String?   @db.VarChar(255)
+  profile           String
+  position          String
+  reg_date          DateTime? @db.Timestamptz(6)
+  file_name1        String?   @db.VarChar(512)
+  original_file_name String?   @db.VarChar(255)
 
   @@schema("itmusic")
 }

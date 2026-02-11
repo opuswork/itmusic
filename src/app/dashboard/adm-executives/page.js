@@ -136,7 +136,7 @@ export default function AdmExecutivesPage() {
                   </td>
                   <td>{exec.position || '-'}</td>
                   <td className={styles.tdProfile}>{profilePreview(exec.profile)}</td>
-                  <td className={styles.tdFile}>{exec.file_name1 || '-'}</td>
+                  <td className={styles.tdFile}>{exec.original_file_name || (exec.file_name1 ? (exec.file_name1.startsWith('http') ? 'Blob' : exec.file_name1) : '-')}</td>
                   <td className={styles.tdActions}>
                     <Link
                       href={`/dashboard/adm-executives/edit-executive/${exec.num}`}
@@ -196,7 +196,12 @@ export default function AdmExecutivesPage() {
                 <p className={styles.modalEmpty}>프로필 없음</p>
               )}
               {selectedExecutive.file_name1 && (
-                <p className={styles.modalFile}>이미지: {selectedExecutive.file_name1}</p>
+                <>
+                  <p className={styles.modalFile}>이미지: {selectedExecutive.original_file_name || selectedExecutive.file_name1}</p>
+                  {selectedExecutive.file_name1.startsWith('http') && (
+                    <img src={selectedExecutive.file_name1} alt="" style={{ maxWidth: '120px', height: 'auto', marginTop: '0.5rem' }} />
+                  )}
+                </>
               )}
             </div>
           </div>

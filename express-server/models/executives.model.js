@@ -16,6 +16,7 @@ export default {
           profile: true,
           position: true,
           file_name1: true,
+          original_file_name: true,
           order_num: true,
         },
         skip: skip,
@@ -73,7 +74,8 @@ export default {
           name: data.name != null ? String(data.name).slice(0, 255) : null,
           profile: String(data.profile ?? ''),
           position: String(data.position ?? ''),
-          file_name1: data.file_name1 != null && data.file_name1 !== '' ? String(data.file_name1).slice(0, 100) : null,
+          file_name1: data.file_name1 != null && data.file_name1 !== '' ? String(data.file_name1).slice(0, 512) : null,
+          original_file_name: data.original_file_name != null && data.original_file_name !== '' ? String(data.original_file_name).slice(0, 255) : null,
         },
       });
       return executive;
@@ -91,7 +93,8 @@ export default {
       if (data.name !== undefined) updateData.name = data.name != null ? String(data.name).slice(0, 255) : null;
       if (data.profile !== undefined) updateData.profile = String(data.profile);
       if (data.position !== undefined) updateData.position = String(data.position);
-      if (data.file_name1 !== undefined) updateData.file_name1 = data.file_name1 != null && data.file_name1 !== '' ? String(data.file_name1).slice(0, 100) : null;
+      if (data.file_name1 !== undefined) updateData.file_name1 = data.file_name1 != null && data.file_name1 !== '' ? String(data.file_name1).slice(0, 512) : null;
+      if (data.original_file_name !== undefined) updateData.original_file_name = data.original_file_name != null && data.original_file_name !== '' ? String(data.original_file_name).slice(0, 255) : null;
       const executive = await prisma.board_trustee.update({
         where: { num },
         data: updateData,

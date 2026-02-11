@@ -58,8 +58,8 @@ export default function AddAdmExecutivePage() {
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [profile, setProfile] = useState('');
-  const [file_name1, setFileName1] = useState('');
-  const [uploading, setUploading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(/** @type {File | null} */ (null));
+  const [previewUrl, setPreviewUrl] = useState(/** @type {string | null} */ (null));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -107,56 +107,65 @@ export default function AddAdmExecutivePage() {
     return profile;
   };
 
-  const handleFileChange = async (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files?.[0];
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    setPreviewUrl(null);
+    setSelectedFile(null);
+    setError('');
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      setError('이미지 파일만 업로드할 수 있습니다.');
+      setError('이미지 파일만 선택할 수 있습니다.');
       return;
     }
-    setError('');
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append('image', file);
-      const res = await fetch('/api/upload/executive', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || '업로드 실패');
-      setFileName1(data.filename);
-    } catch (err) {
-      setError(err.message || '이미지 업로드에 실패했습니다.');
-    } finally {
-      setUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = '';
-    }
+    setSelectedFile(file);
+    setPreviewUrl(URL.createObjectURL(file));
   };
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSaving(true);
     try {
+      let file_name1 = null;
+      let originalFileName = null;
+      if (selectedFile) {
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+        const uploadRes = await fetch('/api/upload/executive', {
+          method: 'POST',
+          body: formData,
+        });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadData.message || '이미지 업로드에 실패했습니다.');
+        file_name1 = uploadData.filename;
+        originalFileName = uploadData.originalFileName ?? selectedFile.name;
+      }
       await http.post('/executives', {
         order_num: Number(order_num) || 0,
         name: name.trim() || null,
         position: position.trim() || '',
         profile: getEditorContent()?.trim() || '',
-        file_name1: file_name1.trim() || null,
+        file_name1,
+        originalFileName,
       });
       router.push('/dashboard/adm-executives');
       router.refresh();
     } catch (err) {
-      const msg = err.response?.data?.message || '저장에 실패했습니다.';
+      const msg = err.message || err.response?.data?.message || '저장에 실패했습니다.';
       setError(msg);
     } finally {
       setSaving(false);
     }
   };
 
-  const imageUrl = file_name1 ? `/assets/people/${file_name1}` : null;
+  const displayPreviewUrl = previewUrl || null;
 
   return (
     <>
@@ -222,20 +231,20 @@ export default function AddAdmExecutivePage() {
               accept="image/*"
               className={styles.fileInput}
               onChange={handleFileChange}
-              disabled={uploading}
+              disabled={saving}
             />
-            {uploading && <p className={styles.uploadStatus}>업로드 중...</p>}
-            {imageUrl && (
+            <p className={styles.uploadHint}>이미지를 선택하면 미리보기가 표시됩니다. 저장 버튼을 누르면 Vercel Blob에 업로드됩니다.</p>
+            {displayPreviewUrl && (
               <div className={styles.imagePreview}>
-                <Image
-                  src={imageUrl}
+                <img
+                  src={displayPreviewUrl}
                   alt="미리보기"
                   width={120}
                   height={160}
-                  unoptimized
                   className={styles.previewImg}
+                  style={{ objectFit: 'cover' }}
                 />
-                <span className={styles.previewName}>{file_name1}</span>
+                <span className={styles.previewName}>{selectedFile?.name ?? ''}</span>
               </div>
             )}
           </div>

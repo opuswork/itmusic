@@ -43,7 +43,8 @@ export async function PUT(request, { params }) {
     if (body.name !== undefined) updateData.name = body.name != null ? String(body.name).slice(0, 255) : null;
     if (body.profile !== undefined) updateData.profile = String(body.profile);
     if (body.position !== undefined) updateData.position = String(body.position);
-    if (body.file_name1 !== undefined) updateData.file_name1 = body.file_name1 != null && body.file_name1 !== '' ? String(body.file_name1).slice(0, 100) : null;
+    if (body.file_name1 !== undefined) updateData.file_name1 = body.file_name1 != null && body.file_name1 !== '' ? String(body.file_name1).slice(0, 512) : null;
+    if (body.originalFileName !== undefined) updateData.original_file_name = body.originalFileName != null && body.originalFileName !== '' ? String(body.originalFileName).slice(0, 255) : null;
 
     const executive = await prisma.board_trustee.update({
       where: { num: id },

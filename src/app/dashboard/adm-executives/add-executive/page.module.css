@@ -167,6 +167,12 @@
   color: #6c757d;
 }
 
+.uploadHint {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
 .imagePreview {
   margin-top: 0.75rem;
   display: flex;
