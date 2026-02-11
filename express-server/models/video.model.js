@@ -21,7 +21,7 @@ export default {
         skip: skip,
         take: take,
         orderBy: {
-          num: 'asc',
+          num: 'desc',
         },
       });
       console.log('Successfully fetched', videos.length, 'videos');
