@@ -98,7 +98,7 @@ export default function AdmSliderPage() {
     if (file_name1.startsWith('http') || file_name1.startsWith('data:')) {
       return file_name1;
     }
-    return `/assets/slider/${file_name1}`;
+    return `/assets/sliderImages/${file_name1}`;
   };
 
   return (
