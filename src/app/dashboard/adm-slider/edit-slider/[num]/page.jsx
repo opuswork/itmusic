@@ -115,7 +115,7 @@ export default function EditAdmSliderPage() {
   const existingImageUrl = file_name1
     ? (file_name1.startsWith('http') || file_name1.startsWith('data:') 
         ? file_name1 
-        : `/assets/slider/${file_name1}`)
+        : `/assets/sliderImages/${file_name1}`)
     : null;
 
   const displayPreviewUrl = previewUrl || existingImageUrl;
