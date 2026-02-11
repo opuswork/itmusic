@@ -8,7 +8,8 @@ export async function POST(request) {
     const name = body.name != null ? String(body.name).slice(0, 255) : null;
     const profile = String(body.profile ?? '');
     const position = String(body.position ?? '');
-    const file_name1 = body.file_name1 != null && body.file_name1 !== '' ? String(body.file_name1).slice(0, 100) : null;
+    const file_name1 = body.file_name1 != null && body.file_name1 !== '' ? String(body.file_name1).slice(0, 512) : null;
+    const original_file_name = body.originalFileName != null && body.originalFileName !== '' ? String(body.originalFileName).slice(0, 255) : null;
 
     const executive = await prisma.board_trustee.create({
       data: {
@@ -17,6 +18,7 @@ export async function POST(request) {
         profile,
         position,
         file_name1,
+        original_file_name,
       },
     });
 
@@ -46,6 +48,7 @@ export async function GET(request) {
         profile: true,
         position: true,
         file_name1: true,
+        original_file_name: true,
         order_num: true,
       },
       skip: skip,

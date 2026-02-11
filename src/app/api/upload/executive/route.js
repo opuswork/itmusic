@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
-
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'assets', 'people');
+import { put } from '@vercel/blob';
 
 function sanitize(name) {
   return name.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 80) || 'image';
@@ -10,6 +7,12 @@ function sanitize(name) {
 
 export async function POST(request) {
   try {
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return NextResponse.json(
+        { success: false, message: 'BLOB_READ_WRITE_TOKEN이 설정되지 않았습니다. Vercel Blob 스토어를 연결해 주세요.' },
+        { status: 503 }
+      );
+    }
     const formData = await request.formData();
     const file = formData.get('image');
     if (!file || typeof file === 'string') {
@@ -18,18 +21,22 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const originalName = file.name || 'image';
-    const ext = path.extname(originalName).toLowerCase() || '.jpg';
-    const base = sanitize(path.basename(originalName, path.extname(originalName)));
-    const filename = `executive-${Date.now()}-${base}${ext}`;
+    const originalFileName = file.name || 'image';
+    const ext = (originalFileName.includes('.') ? originalFileName.slice(originalFileName.lastIndexOf('.')) : '').toLowerCase() || '.jpg';
+    const base = sanitize(originalFileName.replace(/\.[^/.]+$/, '') || 'image');
+    const pathname = `executives/executive-${Date.now()}-${base}${ext}`;
 
-    await mkdir(UPLOAD_DIR, { recursive: true });
-    const filePath = path.join(UPLOAD_DIR, filename);
-    await writeFile(filePath, buffer);
+    const blob = await put(pathname, file, {
+      access: 'public',
+      addRandomSuffix: true,
+      contentType: file.type || undefined,
+    });
 
-    return NextResponse.json({ success: true, filename });
+    return NextResponse.json({
+      success: true,
+      filename: blob.url,
+      originalFileName: originalFileName,
+    });
   } catch (error) {
     console.error('Error uploading executive image:', error);
     return NextResponse.json(

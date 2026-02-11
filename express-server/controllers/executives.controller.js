@@ -91,8 +91,8 @@ async function getOne(req, res) {
 
 async function create(req, res) {
   try {
-    const { order_num = 0, name = null, profile = '', position = '', file_name1 = null } = req.body;
-    const executive = await ExecutivesModel.create({ order_num, name, profile, position, file_name1 });
+    const { order_num = 0, name = null, profile = '', position = '', file_name1 = null, originalFileName = null } = req.body;
+    const executive = await ExecutivesModel.create({ order_num, name, profile, position, file_name1, original_file_name: originalFileName });
     res.status(201).json({ success: true, data: serializeBigInt(executive) });
   } catch (error) {
     console.error('Error in create:', error);
@@ -111,8 +111,8 @@ async function update(req, res) {
     if (!Number.isInteger(n) || n < 1) {
       return res.status(400).json({ success: false, message: 'Invalid executive id' });
     }
-    const { order_num, name, profile, position, file_name1 } = req.body;
-    const executive = await ExecutivesModel.update(id, { order_num, name, profile, position, file_name1 });
+    const { order_num, name, profile, position, file_name1, originalFileName } = req.body;
+    const executive = await ExecutivesModel.update(id, { order_num, name, profile, position, file_name1, original_file_name: originalFileName });
     res.json({ success: true, data: serializeBigInt(executive) });
   } catch (error) {
     if (error.code === 'P2025') {
