@@ -87,10 +87,13 @@ export default function AdmExecutivesPage() {
     }
   };
 
+  const stripHtml = (html) => (html || '').replace(/<[^>]+>/g, '').trim();
   const profilePreview = (profile) => {
     if (!profile) return '-';
-    return String(profile).slice(0, 60) + (String(profile).length > 60 ? '…' : '');
+    const text = stripHtml(String(profile));
+    return (text || '-').slice(0, 60) + (text.length > 60 ? '…' : '');
   };
+  const isHtml = (s) => /<[a-z][\s\S]*>/i.test(String(s));
 
   return (
     <>
@@ -181,9 +184,13 @@ export default function AdmExecutivesPage() {
               )}
               {selectedExecutive.profile ? (
                 <div className={styles.modalProfile}>
-                  {selectedExecutive.profile.split('\n').map((line, i) => (
-                    <p key={i}>{line}</p>
-                  ))}
+                  {isHtml(selectedExecutive.profile) ? (
+                    <div dangerouslySetInnerHTML={{ __html: selectedExecutive.profile }} />
+                  ) : (
+                    selectedExecutive.profile.split('\n').map((line, i) => (
+                      <p key={i}>{line}</p>
+                    ))
+                  )}
                 </div>
               ) : (
                 <p className={styles.modalEmpty}>프로필 없음</p>
