@@ -257,15 +257,16 @@ model opr_mem {
 }
 
 model slider {
-  num        BigInt    @id(map: "idx_36787_primary") @default(autoincrement())
-  order_num  BigInt
-  category   String?   @db.VarChar(255)
-  subject    String    @default("") @db.VarChar(128)
-  reg_date   DateTime? @db.Timestamptz(6)
-  file_name1 String?   @db.VarChar(100)
-  link       String?   @db.VarChar(255)
-  open_type  BigInt?
-  display    Int       @default(1)
+  num               BigInt    @id(map: "idx_36787_primary") @default(autoincrement())
+  order_num         BigInt
+  category          String?   @db.VarChar(255)
+  subject           String    @default("") @db.VarChar(128)
+  reg_date          DateTime? @db.Timestamptz(6)
+  file_name1        String?   @db.VarChar(512)
+  original_file_name String?  @db.VarChar(255)
+  link              String?   @db.VarChar(255)
+  open_type         BigInt?
+  display           Int       @default(1)
 
   @@schema("itmusic")
 }
