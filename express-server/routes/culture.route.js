@@ -11,17 +11,13 @@ cultureRouter.use((req, res, next) => {
 cultureRouter
   .route("/")
   .get(CultureController.getAll)
-  .post((req, res) => {
-    res.json({ message: "Culture 추가" });
-  });
+  .post(CultureController.create);
 
 cultureRouter
   .route("/:id")
-  .patch((req, res) => {
-    res.json({ message: "Culture 수정" });
-  })
-  .delete((req, res) => {
-    res.json({ message: "Culture 삭제" });
-  });
+  .get(CultureController.getOne)
+  .put(CultureController.update)
+  .patch(CultureController.update)
+  .delete(CultureController.remove);
 
 export default cultureRouter;
