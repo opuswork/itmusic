@@ -22,7 +22,7 @@ export default {
         skip: skip,
         take: take,
         orderBy: {
-          order_num: 'asc',
+          num: 'asc',
         },
       });
       return executives;

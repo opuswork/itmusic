@@ -54,9 +54,7 @@ export default function AddAdmExecutivePage() {
   const editorRef = useRef(null);
   const fileInputRef = useRef(null);
   const [scriptsReady, setScriptsReady] = useState(false);
-  const [order_num, setOrderNum] = useState(0);
   const [name, setName] = useState('');
-  const [position, setPosition] = useState('');
   const [profile, setProfile] = useState('');
   const [selectedFile, setSelectedFile] = useState(/** @type {File | null} */ (null));
   const [previewUrl, setPreviewUrl] = useState(/** @type {string | null} */ (null));
@@ -148,9 +146,9 @@ export default function AddAdmExecutivePage() {
         originalFileName = uploadData.originalFileName ?? selectedFile.name;
       }
       await http.post('/executives', {
-        order_num: Number(order_num) || 0,
+        order_num: 0,
         name: name.trim() || null,
-        position: position.trim() || '',
+        position: '',
         profile: getEditorContent()?.trim() || '',
         file_name1,
         originalFileName,
@@ -182,17 +180,6 @@ export default function AddAdmExecutivePage() {
         <form onSubmit={handleSubmit} className={styles.form}>
           {error && <div className={styles.errorMessage}>{error}</div>}
           <div className={styles.formGroup}>
-            <label htmlFor="order_num" className={styles.label}>표시 순서</label>
-            <input
-              id="order_num"
-              type="number"
-              className={styles.input}
-              value={order_num}
-              onChange={(e) => setOrderNum(e.target.value)}
-              min={0}
-            />
-          </div>
-          <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>이름</label>
             <input
               id="name"
@@ -202,17 +189,6 @@ export default function AddAdmExecutivePage() {
               onChange={(e) => setName(e.target.value)}
               placeholder="이름"
               maxLength={255}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="position" className={styles.label}>직위</label>
-            <input
-              id="position"
-              type="text"
-              className={styles.input}
-              value={position}
-              onChange={(e) => setPosition(e.target.value)}
-              placeholder="직위"
             />
           </div>
           <div className={styles.formGroup}>
