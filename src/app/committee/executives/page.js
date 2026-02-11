@@ -105,10 +105,13 @@ export default function ExecutivesPage() {
     };
   }, [executives.length, hasMore, loading, loadExecutives]);
 
-  // 프로필 텍스트를 줄바꿈으로 분리
+  // HTML 태그 제거 후 줄바꿈으로 분리
+  const stripHtml = (html) => (html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const parseProfile = (profile) => {
     if (!profile) return [];
-    return profile.split('\n').filter(line => line.trim());
+    const text = stripHtml(profile);
+    if (!text) return [];
+    return text.split('\n').map(line => line.trim()).filter(Boolean);
   };
 
   // 이미지 URL 생성 (Vercel Blob 전체 URL이면 그대로, 아니면 /assets/people/ 경로)
