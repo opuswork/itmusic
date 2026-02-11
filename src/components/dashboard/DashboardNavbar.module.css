@@ -64,7 +64,24 @@
 .navRight {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
+}
+
+.logoutBtn {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  background: transparent;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logoutBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+  border-color: #adb5bd;
 }
 
 .searchBtn {
