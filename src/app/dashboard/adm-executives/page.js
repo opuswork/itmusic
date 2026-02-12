@@ -99,9 +99,9 @@ export default function AdmExecutivesPage() {
     <>
       <div className={styles.contentHeader}>
         <div className={styles.contentHeaderInner}>
-          <h1 className={styles.pageTitle}>운영위원(상임이사) 관리</h1>
+          <h1 className={styles.pageTitle}>운영위원 관리</h1>
           <Link href="/dashboard/adm-executives/add-executive" className={styles.addButton}>
-            상임이사 추가
+            운영위원 추가
           </Link>
         </div>
       </div>
