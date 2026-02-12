@@ -98,7 +98,15 @@
   text-overflow: ellipsis;
   color: #666;
 }
-.tdFile { color: #666; font-size: 0.8125rem; }
+.tdFile { color: #666; font-size: 0.8125rem; vertical-align: middle; }
+.thumbImg {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  display: block;
+}
 .tdActions { white-space: nowrap; }
 
 .nameButton {

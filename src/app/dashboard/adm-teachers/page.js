@@ -135,7 +135,20 @@ export default function AdmTeachersPage() {
                   </td>
                   <td>{t.position || '-'}</td>
                   <td className={styles.tdProfile}>{profilePreview(t.profile)}</td>
-                  <td className={styles.tdFile}>{t.original_file_name || (t.file_name1 ? (t.file_name1.startsWith('http') ? 'Blob' : t.file_name1) : '-')}</td>
+                  <td className={styles.tdFile}>
+                    {t.file_name1 ? (
+                      <img
+                        src={t.file_name1.startsWith('http') ? t.file_name1 : `/assets/people/${t.file_name1}`}
+                        alt=""
+                        className={styles.thumbImg}
+                        width={40}
+                        height={40}
+                        title={t.original_file_name || t.file_name1}
+                      />
+                    ) : (
+                      '-'
+                    )}
+                  </td>
                   <td className={styles.tdActions}>
                     <Link
                       href={`/dashboard/adm-teachers/edit-teacher/${t.num}`}
