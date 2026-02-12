@@ -1,25 +1,30 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { http } from '@/lib/http/client';
 import styles from './page.module.css';
 
 const DASHBOARD_MENU_ITEMS = [
-  { href: '/dashboard/adm-slider', label: '슬라이드' },
-  { href: '/dashboard/adm-video', label: '협회원연주영상' },
-  { href: '/dashboard/adm-culture', label: '이탈리아문화산책' },
-  { href: '/dashboard/adm-study', label: '유학정보' },
-  { href: '/dashboard/adm-executives', label: '운영위원' },
-  { href: '/dashboard/adm-director', label: '음악감독' },
-  { href: '/dashboard/adm-teachers', label: '지도위원' },
-  { href: '/dashboard/adm-consultants', label: '상임이사' },
-  { href: '/dashboard/adm-committee', label: '상임고문' },
-  { href: '/dashboard/adm-notice', label: '공지사항' },
-  { href: '/dashboard/adm-news', label: '공연소식' },
-  { href: '/dashboard/adm-competitions', label: '콩쿠르소식' },
+  { href: '/dashboard/adm-slider', label: '슬라이드', apiKey: 'sliders', titleKey: 'subject', editPath: (num) => `/dashboard/adm-slider/edit-slider/${num}` },
+  { href: '/dashboard/adm-video', label: '협회원연주영상', apiKey: 'videos', titleKey: 'subject', editPath: (num) => `/dashboard/adm-video/edit-video/${num}` },
+  { href: '/dashboard/adm-culture', label: '이탈리아문화산책', apiKey: 'cultures', titleKey: 'subject', editPath: (num) => `/dashboard/adm-culture/edit-culture/${num}` },
+  { href: '/dashboard/adm-study', label: '유학정보', apiKey: 'studies', titleKey: 'subject', editPath: (num) => `/dashboard/adm-study/edit-study/${num}` },
+  { href: '/dashboard/adm-executives', label: '운영위원', apiKey: 'executives', titleKey: 'name', editPath: (num) => `/dashboard/adm-executives/edit-executive/${num}` },
+  { href: '/dashboard/adm-director', label: '음악감독', apiKey: 'directors', titleKey: 'name', editPath: (num) => `/dashboard/adm-director/edit-director/${num}` },
+  { href: '/dashboard/adm-teachers', label: '지도위원', apiKey: 'teachers', titleKey: 'name', editPath: (num) => `/dashboard/adm-teachers/edit-teacher/${num}` },
+  { href: '/dashboard/adm-consultants', label: '상임이사', apiKey: 'consultants', titleKey: 'name', editPath: (num) => `/dashboard/adm-consultants/edit-consultant/${num}` },
+  { href: '/dashboard/adm-committee', label: '상임고문', apiKey: null, titleKey: 'subject', editPath: null },
+  { href: '/dashboard/adm-notice', label: '공지사항', apiKey: 'notices', titleKey: 'subject', editPath: (num) => `/dashboard/adm-notice/edit-notice/${num}` },
+  { href: '/dashboard/adm-news', label: '공연소식', apiKey: 'concerts', titleKey: 'subject', editPath: (num) => `/dashboard/adm-news/edit-news/${num}` },
+  { href: '/dashboard/adm-competitions', label: '콩쿠르소식', apiKey: 'competitions', titleKey: 'subject', editPath: (num) => `/dashboard/adm-competitions/edit-competition/${num}` },
 ];
 
-function ProductCard({ title = 'Products', href }) {
-  const rows = [];
+function ProductCard({ title, href, rows = [], editPath, titleKey }) {
+  const getTitle = (row) => {
+    const val = row[titleKey];
+    return (val != null && String(val).trim()) ? String(val).trim() : '(제목 없음)';
+  };
 
   return (
     <div className={styles.card}>
@@ -34,60 +39,30 @@ function ProductCard({ title = 'Products', href }) {
           )}
         </h3>
         <div className={styles.cardTools}>
-          <a href="#" className={styles.cardToolBtn} aria-label="다운로드">
-            ↓
-          </a>
-          <a href="#" className={styles.cardToolBtn} aria-label="메뉴">
-            ☰
-          </a>
+          {href && (
+            <Link href={href} className={styles.cardToolBtn} aria-label="목록">
+              ☰
+            </Link>
+          )}
         </div>
       </div>
       <div className={styles.cardBody}>
         {rows.length === 0 ? (
           <p className={styles.emptyState}>불러올 자료가 없습니다</p>
         ) : (
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Sales</th>
-                <th>More</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, i) => (
-                <tr key={i}>
-                  <td>
-                    <div className={styles.tableProduct}>
-                      <div className={styles.tableProductImg} />
-                      <span>
-                        {row.name}
-                        {row.badge && (
-                          <span className={`${styles.badge} ${styles.badgeDanger}`}>{row.badge}</span>
-                        )}
-                      </span>
-                    </div>
-                  </td>
-                  <td>{row.price}</td>
-                  <td>
-                    <small
-                      className={`${styles.mr1} ${row.up ? styles.textSuccess : row.change === '0.5%' ? styles.textWarning : styles.textDanger}`}
-                    >
-                      {row.up ? '↑' : '↓'}
-                      {row.change}
-                    </small>
-                    {row.sold}
-                  </td>
-                  <td>
-                    <Link href="#" className={styles.textMuted} aria-label="검색">
-                      🔍
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <ul className={styles.recentList}>
+            {rows.map((row) => (
+              <li key={row.num ?? row.id ?? Math.random()}>
+                {editPath && row.num != null ? (
+                  <Link href={editPath(row.num)} className={styles.recentLink}>
+                    {getTitle(row)}
+                  </Link>
+                ) : (
+                  <span>{getTitle(row)}</span>
+                )}
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </div>
@@ -95,6 +70,30 @@ function ProductCard({ title = 'Products', href }) {
 }
 
 export default function DashboardPage() {
+  const [recentByHref, setRecentByHref] = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+    const fetchAll = async () => {
+      const next = {};
+      await Promise.all(
+        DASHBOARD_MENU_ITEMS.filter((item) => item.apiKey).map(async (item) => {
+          try {
+            const res = await http.get(`/${item.apiKey}`, { params: { skip: 0, take: 3 } });
+            if (cancelled) return;
+            const list = res.data?.success && Array.isArray(res.data?.data) ? res.data.data : [];
+            next[item.href] = list;
+          } catch (_) {
+            if (!cancelled) next[item.href] = [];
+          }
+        })
+      );
+      if (!cancelled) setRecentByHref((prev) => ({ ...prev, ...next }));
+    };
+    fetchAll();
+    return () => { cancelled = true; };
+  }, []);
+
   return (
     <>
       <div className={styles.contentHeader}>
@@ -108,7 +107,13 @@ export default function DashboardPage() {
           <div className={styles.row}>
             {DASHBOARD_MENU_ITEMS.map((item) => (
               <div key={item.href} className={styles.colLg6}>
-                <ProductCard title={item.label} href={item.href} />
+                <ProductCard
+                  title={item.label}
+                  href={item.href}
+                  rows={recentByHref[item.href] ?? []}
+                  editPath={item.editPath}
+                  titleKey={item.titleKey}
+                />
               </div>
             ))}
           </div>
