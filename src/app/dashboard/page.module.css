@@ -109,6 +109,32 @@
   text-align: center;
 }
 
+.recentList {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.recentList li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.recentList li:last-child {
+  border-bottom: none;
+}
+
+.recentLink {
+  color: #333;
+  text-decoration: none;
+}
+
+.recentLink:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
 .cardTitleLink {
   color: inherit;
   text-decoration: none;
