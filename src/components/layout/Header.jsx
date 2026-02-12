@@ -106,9 +106,9 @@ export default function Header() {
               <Link href="/login" className={styles.loginSection}>
                 로그인
               </Link>
-              <Link href="/signup" className={styles.signupSection}>
+              {/* <Link href="/signup" className={styles.signupSection}>
                 회원가입
-              </Link>
+              </Link> */}
             </>
           )}
         </div>
