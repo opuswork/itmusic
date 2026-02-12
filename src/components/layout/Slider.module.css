@@ -5,6 +5,30 @@
   overflow: hidden;
 }
 
+.loadingWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f6f9;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #dee2e6;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: sliderSpinner 0.7s linear infinite;
+}
+
+@keyframes sliderSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .sliderContainer {
   position: relative;
   width: 100%;
