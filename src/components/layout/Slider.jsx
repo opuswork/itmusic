@@ -68,7 +68,13 @@ export default function Slider() {
   };
 
   if (loading) {
-    return <div className={styles.slider}>로딩 중...</div>;
+    return (
+      <div className={styles.slider}>
+        <div className={styles.loadingWrap} aria-hidden>
+          <span className={styles.spinner} />
+        </div>
+      </div>
+    );
   }
 
   if (sliderImages.length === 0) {
