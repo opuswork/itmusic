@@ -78,23 +78,26 @@ model consultants {
 }
 
 model events {
-  num              BigInt    @id(map: "idx_36669_primary") @default(autoincrement())
-  category         String?   @default("성악콩쿠르") @db.VarChar(255)
-  subject          String    @default("") @db.VarChar(128)
-  order_num        BigInt
-  event_start_date DateTime? @db.Timestamptz(6)
-  event_end_date   DateTime? @db.Timestamptz(6)
-  content          String?
-  location         String    @default("다큐홀") @db.VarChar(255)
-  operator         String    @default("이탈리아음악협회") @db.VarChar(100)
-  planner          String    @default("이탈리아음악협회") @db.VarChar(100)
-  reg_date         DateTime? @db.Timestamptz(6)
-  supporter        String    @default("이탈리아음악협회") @db.VarChar(255)
-  user_ip          String    @default("") @db.VarChar(16)
-  visit            Int       @default(0)
-  file_name1       String?   @db.VarChar(100)
-  file_name2       String?   @db.VarChar(100)
-  file_name3       String?   @db.VarChar(100)
+  num                 BigInt    @id(map: "idx_36669_primary") @default(autoincrement())
+  category            String?   @default("성악콩쿠르") @db.VarChar(255)
+  subject             String    @default("") @db.VarChar(128)
+  order_num           BigInt
+  event_start_date    DateTime? @db.Timestamptz(6)
+  event_end_date      DateTime? @db.Timestamptz(6)
+  content             String?
+  location            String    @default("다큐홀") @db.VarChar(255)
+  operator            String    @default("이탈리아음악협회") @db.VarChar(100)
+  planner             String    @default("이탈리아음악협회") @db.VarChar(100)
+  reg_date            DateTime? @db.Timestamptz(6)
+  supporter           String    @default("이탈리아음악협회") @db.VarChar(255)
+  user_ip             String    @default("") @db.VarChar(16)
+  visit               Int       @default(0)
+  file_name1          String?   @db.VarChar(512)
+  file_name2          String?   @db.VarChar(512)
+  file_name3          String?   @db.VarChar(512)
+  original_file_name1 String?   @db.VarChar(512)
+  original_file_name2 String?   @db.VarChar(512)
+  original_file_name3 String?   @db.VarChar(512)
 
   @@schema("itmusic")
 }
