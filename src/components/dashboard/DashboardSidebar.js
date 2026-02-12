@@ -19,6 +19,7 @@ const menuItems = [
   { href: '/dashboard/adm-notice', label: '공지사항' },
   { href: '/dashboard/adm-news', label: '공연소식' },
   { href: '/dashboard/adm-competitions', label: '콩쿠르소식' },
+  { href: '/dashboard/adm-members', label: '회원관리' },
 ];
 
 export default function DashboardSidebar({ isOpen = true, isCollapsed = false }) {

@@ -210,8 +210,10 @@ model members {
   major_teacher          String?                  @db.VarChar(128)
   webpage                String?                  @db.VarChar(255)
   contents               String?
-  file_name1             String?                  @db.VarChar(128)
-  file_name2             String?                  @db.VarChar(128)
+  file_name1             String?                  @db.VarChar(512)
+  file_name2             String?                  @db.VarChar(512)
+  original_file_name1    String?                  @db.VarChar(512)
+  original_file_name2    String?                  @db.VarChar(512)
   birthday               String?                  @db.VarChar(10)
   email                  String?                  @db.VarChar(255)
   phone                  String?                  @db.VarChar(20)
