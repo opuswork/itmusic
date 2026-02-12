@@ -98,7 +98,7 @@ export default function AdmCompetitionsPage() {
 
   const imageUrl = (c) => {
     if (!c?.file_name1) return null;
-    return c.file_name1.startsWith('http') ? c.file_name1 : `/assets/people/${c.file_name1}`;
+    return c.file_name1.startsWith('http') ? c.file_name1 : `/assets/competition/${c.file_name1}`;
   };
 
   const docLabel = (c, n) => {
@@ -151,7 +151,7 @@ export default function AdmCompetitionsPage() {
                   <td className={styles.tdContent}>{contentPreview(c.content)}</td>
                   <td className={styles.tdImage}>
                     {c.file_name1 ? (
-                      <img
+                      <img 
                         src={imageUrl(c)}
                         alt=""
                         className={styles.thumbImg}
