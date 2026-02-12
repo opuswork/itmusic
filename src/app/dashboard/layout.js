@@ -55,7 +55,17 @@ export default function DashboardLayout({ children }) {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
+      {sidebarOpen && (
+        <div
+          className={styles.sidebarBackdrop}
+          onClick={() => setSidebarOpen(false)}
+          onKeyDown={(e) => e.key === 'Escape' && setSidebarOpen(false)}
+          role="button"
+          tabIndex={-1}
+          aria-label="사이드바 닫기"
+        />
+      )}
       <DashboardNavbar
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((prev) => !prev)}

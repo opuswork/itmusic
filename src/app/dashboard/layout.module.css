@@ -17,6 +17,27 @@
   background: #f4f6f9;
 }
 
+/* Backdrop only on tablet/mobile when sidebar is open; hidden on desktop */
+.sidebarBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1028;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  .sidebarBackdrop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .sidebarOpen.wrapper {
+    overflow: hidden;
+  }
+}
+
 .contentWrapper {
   min-height: 100vh;
   margin-left: 250px;

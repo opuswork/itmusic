@@ -48,6 +48,11 @@ export async function PUT(request, { params }) {
       const levelMap = { '1': 'LEVEL_1', '12': 'LEVEL_12', '20': 'LEVEL_20', '80': 'LEVEL_80' };
       if (levelMap[u] !== undefined) updateData.userlevel = levelMap[u];
     }
+    if (body.mobile !== undefined) updateData.mobile = body.mobile != null && String(body.mobile).trim() !== '' ? String(body.mobile).trim().slice(0, 14) : null;
+    if (body.email !== undefined) updateData.email = body.email != null && body.email !== '' ? String(body.email).slice(0, 255) : null;
+    if (body.contents !== undefined) updateData.contents = body.contents != null ? String(body.contents) : null;
+    if (body.file_name1 !== undefined) updateData.file_name1 = body.file_name1 != null && body.file_name1 !== '' ? String(body.file_name1).slice(0, 512) : null;
+    if (body.originalFileName1 !== undefined) updateData.original_file_name1 = body.originalFileName1 != null && body.originalFileName1 !== '' ? String(body.originalFileName1).slice(0, 512) : null;
 
     const member = await prisma.members.update({
       where: { uno: id },
