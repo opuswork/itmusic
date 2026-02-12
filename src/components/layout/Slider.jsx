@@ -17,8 +17,11 @@ export default function Slider() {
         const response = await http.get('/sliders');
         if (response.data.success) {
           const images = response.data.data.map((slider, idx) => {
+            const src = slider.file_name1?.startsWith('http')
+              ? slider.file_name1
+              : `/assets/sliderImages/${slider.file_name1 || ''}`;
             const imageData = {
-              src: `/assets/sliderImages/${slider.file_name1}`,
+              src,
               link: slider.link || null,
               num: slider.num,
             };
