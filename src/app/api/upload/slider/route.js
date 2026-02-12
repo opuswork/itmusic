@@ -32,7 +32,7 @@ export async function POST(request) {
     }
     const ext = (originalFileName.includes('.') ? originalFileName.slice(originalFileName.lastIndexOf('.')) : '').toLowerCase() || '.jpg';
     const base = sanitize(originalFileName.replace(/\.[^/.]+$/, '') || 'image');
-    const pathname = `sliders/slider-${Date.now()}-${base}${ext}`;
+    const pathname = `sliderImages/slider-${Date.now()}-${base}${ext}`;
 
     const blob = await put(pathname, file, {
       access: 'public',
