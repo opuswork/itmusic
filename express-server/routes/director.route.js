@@ -11,17 +11,13 @@ directorRouter.use((req, res, next) => {
 directorRouter
   .route("/")
   .get(DirectorController.getAll)
-  .post((req, res) => {
-    res.json({ message: "Director 추가" });
-  });
+  .post(DirectorController.create);
 
 directorRouter
   .route("/:id")
-  .patch((req, res) => {
-    res.json({ message: "Director 수정" });
-  })
-  .delete((req, res) => {
-    res.json({ message: "Director 삭제" });
-  });
+  .get(DirectorController.getOne)
+  .put(DirectorController.update)
+  .patch(DirectorController.update)
+  .delete(DirectorController.remove);
 
 export default directorRouter;

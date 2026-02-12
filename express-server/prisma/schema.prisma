@@ -126,12 +126,13 @@ model itmusic_concour_intro {
 }
 
 model itmusic_director {
-  num        BigInt    @id(map: "idx_36706_primary")
-  name       String    @default("") @db.VarChar(128)
-  position   String    @db.VarChar(128)
-  text       String?
-  reg_date   DateTime? @db.Timestamptz(6)
-  file_name1 String    @db.VarChar(128)
+  num                BigInt    @id(map: "idx_36706_primary")
+  name               String    @default("") @db.VarChar(128)
+  position           String    @db.VarChar(128)
+  text               String?
+  reg_date           DateTime? @db.Timestamptz(6)
+  file_name1         String?   @db.VarChar(512)
+  original_file_name String?   @db.VarChar(512)
 
   @@schema("itmusic")
 }
