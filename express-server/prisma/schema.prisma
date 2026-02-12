@@ -229,19 +229,20 @@ model members {
 }
 
 model notice {
-  num        BigInt    @id(map: "idx_36765_primary") @default(autoincrement())
-  user_name  String    @default("") @db.VarChar(32)
-  email      String?   @db.VarChar(64)
-  user_pwd   String    @default("") @db.VarChar(20)
-  category   String?   @db.VarChar(255)
-  subject    String    @default("") @db.VarChar(128)
-  content    String?
-  reg_date   DateTime? @db.Timestamptz(6)
-  user_ip    String    @default("") @db.VarChar(16)
-  visit      Int       @default(0)
-  file_name1 String?   @default("1") @db.VarChar(100)
-  file_name2 String?   @default("none") @db.VarChar(100)
-  file_name3 String?   @default("none") @db.VarChar(100)
+  num                BigInt    @id(map: "idx_36765_primary") @default(autoincrement())
+  user_name          String    @default("") @db.VarChar(32)
+  email              String?   @db.VarChar(64)
+  user_pwd           String    @default("") @db.VarChar(20)
+  category           String?   @db.VarChar(255)
+  subject            String    @default("") @db.VarChar(128)
+  content            String?
+  reg_date           DateTime? @db.Timestamptz(6)
+  user_ip            String    @default("") @db.VarChar(16)
+  visit              Int       @default(0)
+  file_name1         String?   @db.VarChar(512)
+  original_file_name String?   @db.VarChar(512)
+  file_name2         String?   @default("none") @db.VarChar(100)
+  file_name3         String?   @default("none") @db.VarChar(100)
 
   @@schema("itmusic")
 }
