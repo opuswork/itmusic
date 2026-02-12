@@ -130,7 +130,7 @@ export default function EditAdmMemberPage() {
   };
 
   const existingImageUrl = file_name1
-    ? (file_name1.startsWith('http') ? file_name1 : `/assets/people/${file_name1}`)
+    ? (file_name1.startsWith('http') ? file_name1 : `/assets/accounts/${file_name1}`)
     : null;
   const displayImageUrl = imagePreviewUrl || existingImageUrl;
 
