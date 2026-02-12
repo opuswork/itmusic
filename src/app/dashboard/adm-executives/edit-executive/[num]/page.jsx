@@ -48,6 +48,13 @@ function loadStyle(href) {
   });
 }
 
+/** Convert plain-text line breaks (\r\n, \r, \n) to <br> so the WYSIWYG editor displays them. */
+function plainTextLineBreaksToHtml(str) {
+  if (typeof str !== 'string' || !str) return '';
+  if (/<[a-z][\s\S]*>/i.test(str)) return str;
+  return str.replace(/\r\n|\r|\n/g, '<br>');
+}
+
 export default function EditAdmExecutivePage() {
   const router = useRouter();
   const params = useParams();
@@ -136,7 +143,7 @@ export default function EditAdmExecutivePage() {
     if (!scriptsReady || !editorRef.current || loading || typeof window === 'undefined' || !window.$) return;
     if (initialProfileSet.current) return;
     try {
-      window.$(editorRef.current).summernote('code', profile ?? '');
+      window.$(editorRef.current).summernote('code', plainTextLineBreaksToHtml(profile ?? ''));
       initialProfileSet.current = true;
     } catch (_) {}
   }, [scriptsReady, loading, profile]);
