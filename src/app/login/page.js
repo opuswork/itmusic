@@ -72,7 +72,7 @@ export default function LoginPage() {
             <div className={styles.loginFormContainer}>
               <div className={styles.loginForm}>
                 <div className={styles.snsLoginButtons}>
-                  <button 
+                  {/* <button 
                     type="button" 
                     className={`${styles.snsButton} ${styles.facebookButton}`}
                     onClick={() => {
@@ -82,7 +82,7 @@ export default function LoginPage() {
                   >
                     <span className={styles.snsIcon}>f</span>
                     <span className={styles.snsButtonText}>Facebook 로그인</span>
-                  </button>
+                  </button> */}
                   
                   <button 
                     type="button" 
@@ -93,7 +93,7 @@ export default function LoginPage() {
                     <span className={styles.snsButtonText}>카카오 로그인</span>
                   </button>
                   
-                  <button 
+                  {/* <button 
                     type="button" 
                     className={`${styles.snsButton} ${styles.naverButton}`}
                     onClick={() => {
@@ -103,9 +103,9 @@ export default function LoginPage() {
                   >
                     <span className={styles.snsIcon}>N</span>
                     <span className={styles.snsButtonText}>네이버 로그인</span>
-                  </button>
+                  </button> */}
                   
-                  <button 
+                  {/* <button 
                     type="button" 
                     className={`${styles.snsButton} ${styles.googleButton}`}
                     onClick={() => {
@@ -115,7 +115,7 @@ export default function LoginPage() {
                   >
                     <span className={styles.snsIcon}>G+</span>
                     <span className={styles.snsButtonText}>Google 로그인</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
