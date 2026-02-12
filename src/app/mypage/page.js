@@ -6,11 +6,44 @@ import MyPageSidebar from '@/components/layout/MyPageSidebar';
 import SubHeader from '@/components/layout/SubHeader';
 import Footer from '@/components/layout/Footer';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { getCurrentUser } from '@/lib/auth/auth';
 import styles from './page.module.css';
 
 export default function MyPage() {
+  const router = useRouter();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const data = await getCurrentUser();
+        const authenticated = data.isAuthenticated === true;
+        setIsAuthenticated(authenticated);
+        if (!authenticated) {
+          router.replace('/login');
+          return;
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+        router.replace('/login');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+
+    // Listen for focus events to re-check auth (e.g., after logout in another tab)
+    const handleFocus = () => {
+      checkAuth();
+    };
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [router]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,6 +64,23 @@ export default function MyPage() {
       setIsSidebarCollapsed(!isSidebarCollapsed);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className={styles.container}>
+        <Header />
+        <Nav />
+        <div className={styles.contentWrapper}>
+          <div style={{ padding: '2rem', textAlign: 'center' }}>로딩 중...</div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return null; // Will redirect to /login
+  }
 
   return (
     <div className={styles.container}>
