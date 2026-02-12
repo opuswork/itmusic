@@ -1,0 +1,169 @@
+.contentHeader {
+  padding: 1rem 1.5rem;
+  background: #f4f6f9;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.contentHeaderInner {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.backLink {
+  color: #495057;
+  text-decoration: none;
+  font-size: 0.875rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.backLink:hover {
+  background: #e9ecef;
+  color: #212529;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.form {
+  max-width: 560px;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 1.5rem;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125);
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  color: #212529;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.errorMessage {
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.submitButton {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  background: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #0069d9;
+}
+
+.submitButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  color: #6c757d;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cancelButton:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.editorPlaceholder {
+  padding: 1rem;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+.fileInput {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.uploadHint {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.imagePreview {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.previewImg {
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.previewName {
+  font-size: 0.875rem;
+  color: #495057;
+}
