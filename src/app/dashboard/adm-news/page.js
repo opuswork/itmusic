@@ -98,7 +98,7 @@ export default function AdmNewsPage() {
 
   const imageUrl = (c) => {
     if (!c?.file_name1) return null;
-    return c.file_name1.startsWith('http') ? c.file_name1 : `/assets/people/${c.file_name1}`;
+    return c.file_name1.startsWith('http') ? c.file_name1 : `/assets/poster/${c.file_name1}`;
   };
 
   const docLabel = (c, n) => {
