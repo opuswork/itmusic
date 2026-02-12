@@ -144,10 +144,15 @@
 @media (max-width: 991.98px) {
   .aside {
     transform: translateX(-250px);
+    z-index: 1030;
+    box-shadow: none;
   }
 
   .asideOpen {
     width: 250px;
+    max-width: 85vw;
     transform: translateX(0);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
   }
 }
