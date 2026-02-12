@@ -121,7 +121,7 @@ export default function AdmMembersPage() {
   const fullName = (m) => [m?.firstname, m?.lastname].filter(Boolean).join(' ') || '-';
   const imageUrl = (m) => {
     if (!m?.file_name1) return null;
-    return m.file_name1.startsWith('http') ? m.file_name1 : `/assets/people/${m.file_name1}`;
+    return m.file_name1.startsWith('http') ? m.file_name1 : `/assets/accounts/${m.file_name1}`;
   };
 
   return (
