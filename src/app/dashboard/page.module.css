@@ -101,6 +101,28 @@
   overflow-x: auto;
 }
 
+.loadingWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #dee2e6;
+  border-top-color: #007bff;
+  border-radius: 50%;
+  animation: dashboardSpinner 0.7s linear infinite;
+}
+
+@keyframes dashboardSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .emptyState {
   margin: 0;
   padding: 1.5rem 1rem;

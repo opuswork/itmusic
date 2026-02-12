@@ -20,7 +20,7 @@ const DASHBOARD_MENU_ITEMS = [
   { href: '/dashboard/adm-competitions', label: '콩쿠르소식', apiKey: 'competitions', titleKey: 'subject', editPath: (num) => `/dashboard/adm-competitions/edit-competition/${num}` },
 ];
 
-function ProductCard({ title, href, rows = [], editPath, titleKey }) {
+function ProductCard({ title, href, rows = [], editPath, titleKey, isLoading }) {
   const getTitle = (row) => {
     const val = row[titleKey];
     return (val != null && String(val).trim()) ? String(val).trim() : '(제목 없음)';
@@ -41,13 +41,17 @@ function ProductCard({ title, href, rows = [], editPath, titleKey }) {
         <div className={styles.cardTools}>
           {href && (
             <Link href={href} className={styles.cardToolBtn} aria-label="목록">
-              ☰
+            ☰
             </Link>
           )}
         </div>
       </div>
       <div className={styles.cardBody}>
-        {rows.length === 0 ? (
+        {isLoading ? (
+          <div className={styles.loadingWrap} aria-hidden>
+            <span className={styles.spinner} />
+          </div>
+        ) : rows.length === 0 ? (
           <p className={styles.emptyState}>불러올 자료가 없습니다</p>
         ) : (
           <ul className={styles.recentList}>
@@ -113,6 +117,7 @@ export default function DashboardPage() {
                   rows={recentByHref[item.href] ?? []}
                   editPath={item.editPath}
                   titleKey={item.titleKey}
+                  isLoading={!(item.href in recentByHref)}
                 />
               </div>
             ))}
