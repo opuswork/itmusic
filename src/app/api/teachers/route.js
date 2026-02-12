@@ -7,8 +7,6 @@ export async function GET(request) {
     const skip = parseInt(searchParams.get('skip')) || 0;
     const take = parseInt(searchParams.get('take')) || 5;
 
-    console.log('Fetching teachers with skip:', skip, 'take:', take);
-    
     const teachers = await prisma.teachers.findMany({
       select: {
         num: true,
@@ -16,19 +14,16 @@ export async function GET(request) {
         profile: true,
         position: true,
         file_name1: true,
+        original_file_name: true,
         order_num: true,
+        reg_date: true,
       },
-      skip: skip,
-      take: take,
-      orderBy: {
-        order_num: 'asc',
-      },
+      skip,
+      take,
+      orderBy: { order_num: 'asc' },
     });
 
     const total = await prisma.teachers.count();
-
-    console.log('Successfully fetched', teachers.length, 'teachers out of', total);
-
     const serializedTeachers = serializeBigInt(teachers);
     const serializedTotal = typeof total === 'bigint' ? total.toString() : total;
 
@@ -36,19 +31,48 @@ export async function GET(request) {
       success: true,
       data: serializedTeachers,
       total: serializedTotal,
-      skip: skip,
-      take: take,
+      skip,
+      take,
     });
   } catch (error) {
     console.error('Error in GET /api/teachers:', error);
-    console.error('Error stack:', error.stack);
     return Response.json(
       {
         success: false,
-        message: '교수진 데이터를 불러오는 중 오류가 발생했습니다.',
+        message: '지도위원 데이터를 불러오는 중 오류가 발생했습니다.',
         error: error.message,
-        code: error.code,
       },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const order_num = body.order_num != null ? Number(body.order_num) : 0;
+    const name = body.name != null ? String(body.name).slice(0, 255) : null;
+    const profile = String(body.profile ?? '');
+    const position = String(body.position ?? '');
+    const file_name1 = body.file_name1 != null && body.file_name1 !== '' ? String(body.file_name1).slice(0, 512) : null;
+    const original_file_name = body.originalFileName != null && body.originalFileName !== '' ? String(body.originalFileName).slice(0, 512) : null;
+
+    const teacher = await prisma.teachers.create({
+      data: {
+        order_num: BigInt(order_num),
+        name,
+        profile,
+        position,
+        file_name1,
+        original_file_name,
+      },
+    });
+
+    return Response.json({ success: true, data: serializeBigInt(teacher) }, { status: 201 });
+  } catch (error) {
+    console.error('Error in POST /api/teachers:', error);
+    return Response.json(
+      { success: false, message: '지도위원 등록 중 오류가 발생했습니다.', error: error.message },
       { status: 500 }
     );
   }
