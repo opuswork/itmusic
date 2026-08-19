@@ -35,9 +35,20 @@ const formatDateRange = (startDate, endDate) => {
   return `${start} - ${end}`;
 };
 
+// 이미지 URL 생성 (Vercel Blob 전체 URL이면 그대로, 아니면 /assets/{folder}/ 경로)
+const getAssetUrl = (fileName, folder) => {
+  if (!fileName || fileName === 'none' || fileName === '1') return null;
+  if (fileName.startsWith('http')) return fileName;
+  return `/assets/${folder}/${fileName}`;
+};
+
 // 모달 컴포넌트
 function DetailModal({ isOpen, onClose, data, type }) {
   if (!isOpen || !data) return null;
+
+  const imageUrl = (type === 'concert' || type === 'competition')
+    ? getAssetUrl(data.file_name1, type === 'concert' ? 'poster' : 'competition')
+    : null;
 
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
@@ -129,10 +140,10 @@ function DetailModal({ isOpen, onClose, data, type }) {
                   dangerouslySetInnerHTML={{ __html: data.content }}
                 />
               )}
-              {data.file_name1 && (
+              {imageUrl && (
                 <div className={styles.modalImageContainer}>
                   <Image
-                    src={`/assets/${type === 'concert' ? 'poster' : 'competition'}/${data.file_name1}`}
+                    src={imageUrl}
                     alt={data.subject || '이미지'}
                     width={800}
                     height={1200}
@@ -324,9 +335,7 @@ function ConcertCompetitionBox() {
     }
     
     const currentConcert = concerts[currentConcertIndex];
-    const imageUrl = currentConcert.file_name1
-      ? `/assets/poster/${currentConcert.file_name1}`
-      : null;
+    const imageUrl = getAssetUrl(currentConcert.file_name1, 'poster');
 
     return (
       <div className={styles.tabContent}>
@@ -387,9 +396,7 @@ function ConcertCompetitionBox() {
     }
     
     const currentCompetition = competitions[currentCompetitionIndex];
-    const imageUrl = currentCompetition.file_name1
-      ? `/assets/competition/${currentCompetition.file_name1}`
-      : null;
+    const imageUrl = getAssetUrl(currentCompetition.file_name1, 'competition');
 
     return (
       <div className={styles.tabContent}>

@@ -144,15 +144,17 @@ export default function CompetitionPage() {
     return `${start} ~ ${end}`;
   };
 
-  // 이미지 URL 생성
+  // 이미지 URL 생성 (Vercel Blob 전체 URL이면 그대로, 아니면 /assets/competition/ 경로)
   const getImageUrl = (fileName) => {
     if (!fileName || fileName === 'none' || fileName === '1') return null;
+    if (fileName.startsWith('http')) return fileName;
     return `/assets/competition/${fileName}`;
   };
 
   // 파일 다운로드 URL 생성
   const getFileDownloadUrl = (fileName) => {
     if (!fileName || fileName === 'none' || fileName === '1') return null;
+    if (fileName.startsWith('http')) return fileName;
     return `/assets/competition/${fileName}`;
   };
 
