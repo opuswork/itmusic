@@ -91,7 +91,7 @@ model events {
   location            String    @default("다큐홀") @db.VarChar(255)
   operator            String    @default("이탈리아음악협회") @db.VarChar(100)
   planner             String    @default("이탈리아음악협회") @db.VarChar(100)
-  reg_date            DateTime? @db.Timestamptz(6)
+  reg_date            DateTime? @default(now()) @db.Timestamptz(6)
   supporter           String    @default("이탈리아음악협회") @db.VarChar(255)
   user_ip             String    @default("") @db.VarChar(16)
   visit               Int       @default(0)
