@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
 import { http } from '@/lib/http/client';
+import { parseUploadResponse, uploadImageToBlob } from '@/lib/upload/blobImage';
 import styles from '@/app/dashboard/adm-competitions/add-competition/page.module.css';
 
 const SUMMERNOTE_CDN = {
@@ -211,8 +212,7 @@ export default function EditAdmCompetitionPage() {
     const formData = new FormData();
     formData.append('document', file);
     const res = await fetch('/api/upload/document', { method: 'POST', body: formData });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || '문서 업로드에 실패했습니다.');
+    const data = await parseUploadResponse(res, '문서 업로드에 실패했습니다.');
     return { filename: data.filename, originalFileName: data.originalFileName ?? file.name };
   };
 
@@ -224,11 +224,7 @@ export default function EditAdmCompetitionPage() {
       let final_file_name1 = file_name1?.trim() || null;
       let final_original_file_name1 = original_file_name1?.trim() || null;
       if (imageFile) {
-        const formData = new FormData();
-        formData.append('image', imageFile);
-        const uploadRes = await fetch('/api/upload/executive', { method: 'POST', body: formData });
-        const uploadData = await uploadRes.json();
-        if (!uploadRes.ok) throw new Error(uploadData.message || '이미지 업로드에 실패했습니다.');
+        const uploadData = await uploadImageToBlob(imageFile, 'competitions');
         final_file_name1 = uploadData.filename;
         final_original_file_name1 = uploadData.originalFileName ?? imageFile.name;
       }
@@ -278,7 +274,7 @@ export default function EditAdmCompetitionPage() {
   };
 
   const existingImageUrl = file_name1
-    ? (file_name1.startsWith('http') ? file_name1 : `/assets/people/${file_name1}`)
+    ? (file_name1.startsWith('http') ? file_name1 : `/assets/competition/${file_name1}`)
     : null;
   const displayImageUrl = imagePreviewUrl || existingImageUrl;
 
@@ -397,7 +393,7 @@ export default function EditAdmCompetitionPage() {
               onChange={onImageChange}
               disabled={saving}
             />
-            <p className={styles.uploadHint}>새 이미지를 선택하면 기존 이미지를 대체합니다.</p>
+            <p className={styles.uploadHint}>새 이미지를 선택하면 기존 이미지를 대체합니다. 큰 이미지는 자동으로 최적화됩니다.</p>
             {displayImageUrl && (
               <div className={styles.imagePreview}>
                 <img src={displayImageUrl} alt="미리보기" width={120} height={160} className={styles.previewImg} style={{ objectFit: 'cover' }} />

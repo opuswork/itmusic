@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { http } from '@/lib/http/client';
+import { parseUploadResponse, uploadImageToBlob } from '@/lib/upload/blobImage';
 import styles from './page.module.css';
 
 const SUMMERNOTE_CDN = {
@@ -150,8 +151,7 @@ export default function AddAdmCompetitionPage() {
     const formData = new FormData();
     formData.append('document', file);
     const res = await fetch('/api/upload/document', { method: 'POST', body: formData });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || '문서 업로드에 실패했습니다.');
+    const data = await parseUploadResponse(res, '문서 업로드에 실패했습니다.');
     return { filename: data.filename, originalFileName: data.originalFileName ?? file.name };
   };
 
@@ -163,11 +163,7 @@ export default function AddAdmCompetitionPage() {
       let file_name1 = null;
       let originalFileName1 = null;
       if (imageFile) {
-        const formData = new FormData();
-        formData.append('image', imageFile);
-        const uploadRes = await fetch('/api/upload/executive', { method: 'POST', body: formData });
-        const uploadData = await uploadRes.json();
-        if (!uploadRes.ok) throw new Error(uploadData.message || '이미지 업로드에 실패했습니다.');
+        const uploadData = await uploadImageToBlob(imageFile, 'competitions');
         file_name1 = uploadData.filename;
         originalFileName1 = uploadData.originalFileName ?? imageFile.name;
       }
@@ -325,7 +321,7 @@ export default function AddAdmCompetitionPage() {
               onChange={onImageChange}
               disabled={saving}
             />
-            <p className={styles.uploadHint}>이미지 파일만 업로드됩니다.</p>
+            <p className={styles.uploadHint}>이미지 파일만 업로드됩니다. 큰 이미지는 자동으로 최적화됩니다.</p>
             {imagePreviewUrl && (
               <div className={styles.imagePreview}>
                 <img src={imagePreviewUrl} alt="미리보기" width={120} height={160} className={styles.previewImg} style={{ objectFit: 'cover' }} />
