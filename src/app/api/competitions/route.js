@@ -92,6 +92,7 @@ export async function POST(request) {
         supporter,
         event_start_date,
         event_end_date,
+        reg_date: new Date(),
         file_name1,
         file_name2,
         file_name3,
