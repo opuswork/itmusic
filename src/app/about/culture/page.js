@@ -128,7 +128,7 @@ export default function CulturePage() {
   // 💡 수정된 부분: 모달 대신 상세 페이지(자체 라우팅)로 이동
   const handleCultureClick = (culture) => {
     // '/culture/1' 처럼 해당 게시글 번호(num)를 포함한 URL로 이동합니다.
-    router.push(`/culture/${culture.num}`);
+    router.push(`/about/culture/${culture.num}`);
   };
 
   const handleSearch = (e) => {
