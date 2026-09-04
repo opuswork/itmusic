@@ -17,6 +17,7 @@ export default function CultureDetailPage() {
   
   const [culture, setCulture] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   // 사이드바 상태 처리 로직 (기존과 동일)
@@ -37,41 +38,56 @@ export default function CultureDetailPage() {
 
   // 상세 데이터 로드
   useEffect(() => {
+    if (!id) return;
+
+    let cancelled = false;
     const fetchCultureDetail = async () => {
+      setLoading(true);
+      setError('');
       try {
-        setLoading(true);
-        // 백엔드 API 명세에 맞춰 엔드포인트를 수정해주세요
         const response = await http.get(`/cultures/${id}`);
-        
+        if (cancelled) return;
         if (response.data.success) {
           setCulture(response.data.data);
+        } else {
+          setError('게시물을 찾을 수 없습니다.');
         }
-      } catch (error) {
-        console.error('Error fetching culture detail:', error);
-        alert('데이터를 불러오는데 실패했습니다.');
-        router.back();
+      } catch (err) {
+        if (cancelled) return;
+        console.error('Error fetching culture detail:', err);
+        setError(
+          err.response?.status === 404
+            ? '게시물을 찾을 수 없습니다.'
+            : '게시물을 불러오는 중 오류가 발생했습니다.'
+        );
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
-    if (id) {
-      fetchCultureDetail();
-    }
-  }, [id, router]);
+    fetchCultureDetail();
+    return () => { cancelled = true; };
+  }, [id]);
 
   const formatDate = (dateValue) => {
-    if (!dateValue) return '-';
+    if (!dateValue || (typeof dateValue === 'object' && Object.keys(dateValue).length === 0)) {
+      return '-';
+    }
     try {
-      const date = new Date(dateValue);
+      const date = dateValue instanceof Date ? dateValue : new Date(dateValue);
       if (isNaN(date.getTime())) return '-';
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
-    } catch (error) {
+    } catch (err) {
+      console.error('Error formatting date:', err, dateValue);
       return '-';
     }
+  };
+
+  const handleBackToList = () => {
+    router.push('/about/culture');
   };
 
   return (
@@ -95,40 +111,39 @@ export default function CultureDetailPage() {
             <SubHeader title="이탈리아문화산책 상세" />
           </div>
           <main className={styles.mainContent}>
-            
             {loading ? (
-              <div>로딩 중...</div>
-            ) : culture ? (
+              <div className={styles.detailMessage}>로딩 중...</div>
+            ) : error || !culture ? (
               <div className={styles.detailContainer}>
-                {/* 모달에 있던 UI를 페이지 UI로 변환 */}
-                <h1 className={styles.pageTitle}>{culture.subject}</h1>
-                <div style={{ marginBottom: '20px', color: '#666' }}>
-                  <span>게시일: {formatDate(culture.reg_date)}</span>
-                  <span style={{ marginLeft: '15px' }}>조회수: {culture.visit}</span>
+                <div className={styles.detailMessage}>{error || '게시물을 찾을 수 없습니다.'}</div>
+                <div className={styles.detailActions}>
+                  <button type="button" className={styles.backButton} onClick={handleBackToList}>
+                    목록으로
+                  </button>
                 </div>
-                
-                <hr style={{ marginBottom: '20px' }} />
-                
+              </div>
+            ) : (
+              <div className={styles.detailContainer}>
+                <h1 className={styles.pageTitle}>{culture.subject || '-'}</h1>
+                <div className={styles.detailMeta}>
+                  <span>게시일: {formatDate(culture.reg_date)}</span>
+                  <span>
+                    조회수: {typeof culture.visit === 'number' ? culture.visit : (culture.visit ? Number(culture.visit) : 0)}
+                  </span>
+                </div>
                 <div
                   className={styles.detailContentText}
                   dangerouslySetInnerHTML={{
                     __html: culture.content || '내용이 없습니다.'
                   }}
                 />
-
-                <div style={{ marginTop: '40px', textAlign: 'center' }}>
-                  <button 
-                    onClick={() => router.back()} 
-                    style={{ padding: '10px 20px', cursor: 'pointer' }}
-                  >
-                    목록으로 돌아가기
+                <div className={styles.detailActions}>
+                  <button type="button" className={styles.backButton} onClick={handleBackToList}>
+                    목록으로
                   </button>
                 </div>
               </div>
-            ) : (
-              <div>데이터를 찾을 수 없습니다.</div>
             )}
-
           </main>
         </div>
       </div>

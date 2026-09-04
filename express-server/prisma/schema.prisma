@@ -244,7 +244,7 @@ model notice {
   category           String?   @db.VarChar(255)
   subject            String    @default("") @db.VarChar(128)
   content            String?
-  reg_date           DateTime? @db.Timestamptz(6)
+  reg_date           DateTime? @default(now()) @db.Timestamptz(6)
   user_ip            String    @default("") @db.VarChar(16)
   visit              Int       @default(0)
   file_name1         String?   @db.VarChar(512)
