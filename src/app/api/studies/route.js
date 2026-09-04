@@ -14,6 +14,8 @@ export async function POST(request) {
         subject: String(subject).slice(0, 128),
         content: content != null ? String(content) : null,
         category: category != null ? String(category).slice(0, 255) : null,
+        reg_date: new Date(),
+        visit: 0,
         file_name1: '1',
         file_name2: 'none',
         file_name3: 'none',
