@@ -20,6 +20,16 @@ export async function GET(request, { params }) {
     if (!notice) {
       return Response.json({ success: false, message: '공지사항을 찾을 수 없습니다.' }, { status: 404 });
     }
+
+    // 관리자 수정 화면 등에서 불러올 때는 조회수가 늘지 않도록 view=1일 때만 증가
+    if (new URL(request.url).searchParams.get('view') === '1') {
+      const viewed = await prisma.notice.update({
+        where: { num: id },
+        data: { visit: { increment: 1 } },
+      });
+      return Response.json({ success: true, data: serializeBigInt(viewed) });
+    }
+
     return Response.json({ success: true, data: serializeBigInt(notice) });
   } catch (error) {
     console.error('Error in GET /api/notices/[id]:', error);

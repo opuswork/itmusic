@@ -71,6 +71,8 @@ export async function POST(request) {
         subject,
         content: content ?? '',
         category,
+        reg_date: new Date(),
+        visit: 0,
         file_name1,
         original_file_name,
       },

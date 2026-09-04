@@ -48,7 +48,7 @@ export default function NoticeDetailPage() {
       setLoading(true);
       setError('');
       try {
-        const response = await http.get(`/notices/${id}`);
+        const response = await http.get(`/notices/${id}`, { params: { view: 1 } });
         if (cancelled) return;
         if (response.data.success) {
           setNotice(response.data.data);
