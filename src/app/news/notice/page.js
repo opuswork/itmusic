@@ -6,15 +6,16 @@ import NoticeSidebar from '@/components/layout/NoticeSidebar';
 import SubHeader from '@/components/layout/SubHeader';
 import Footer from '@/components/layout/Footer';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { http } from '@/lib/http/client';
 import styles from './page.module.css';
 
 export default function NoticePage() {
+  const router = useRouter();
+
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [notices, setNotices] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedNotice, setSelectedNotice] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const observerRef = useRef(null);
@@ -144,16 +145,9 @@ export default function NoticePage() {
     }
   };
 
-  // 모달 열기
+  // 상세 페이지로 이동
   const handleNoticeClick = (notice) => {
-    setSelectedNotice(notice);
-    setIsModalOpen(true);
-  };
-
-  // 모달 닫기
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedNotice(null);
+    router.push(`/news/notice/${notice.num}`);
   };
 
   // 검색 핸들러
@@ -261,37 +255,6 @@ export default function NoticePage() {
               )}
             </div>
           </div>
-
-          {/* 모달 */}
-          {isModalOpen && selectedNotice && (
-            <div className={styles.modalOverlay} onClick={handleCloseModal}>
-              <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                <button
-                  className={styles.modalCloseButton}
-                  onClick={handleCloseModal}
-                  aria-label="닫기"
-                >
-                  [닫기]
-                </button>
-                <div className={styles.modalHeader}>
-                  <h2>{selectedNotice.subject}</h2>
-                  {selectedNotice.reg_date && (
-                    <p className={styles.modalDate}>
-                      게시일: {formatDate(selectedNotice.reg_date)}
-                    </p>
-                  )}
-                </div>
-                <div className={styles.modalBody}>
-                  <div
-                    className={styles.modalContentText}
-                    dangerouslySetInnerHTML={{
-                      __html: selectedNotice.content || '내용이 없습니다.'
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
           </main>
         </div>
       </div>
