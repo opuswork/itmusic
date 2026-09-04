@@ -6,15 +6,15 @@ import Sidebar from '@/components/layout/Sidebar';
 import SubHeader from '@/components/layout/SubHeader';
 import Footer from '@/components/layout/Footer';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { http } from '@/lib/http/client';
 import styles from './page.module.css';
 
 export default function StudyPage() {
+  const router = useRouter();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [studies, setStudies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedStudy, setSelectedStudy] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const observerRef = useRef(null);
@@ -140,16 +140,9 @@ export default function StudyPage() {
     }
   };
 
-  // 모달 열기
+  // 상세 페이지로 이동
   const handleStudyClick = (study) => {
-    setSelectedStudy(study);
-    setIsModalOpen(true);
-  };
-
-  // 모달 닫기
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedStudy(null);
+    router.push(`/about/study/${study.num}`);
   };
 
   // 검색 핸들러
@@ -279,50 +272,6 @@ export default function StudyPage() {
               )}
             </div>
           </div>
-
-          {/* 모달 */}
-          {isModalOpen && selectedStudy && (
-            <div className={styles.modalOverlay} onClick={handleCloseModal}>
-              <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                <button
-                  className={styles.modalCloseButton}
-                  onClick={handleCloseModal}
-                  aria-label="닫기"
-                >
-                  [닫기]
-                </button>
-                <div className={styles.modalHeader}>
-                  <h2>{selectedStudy.subject}</h2>
-                  {selectedStudy.reg_date && (
-                    <p className={styles.modalDate}>
-                      게시일: {formatDate(selectedStudy.reg_date)}
-                    </p>
-                  )}
-                </div>
-                <div className={styles.modalBody}>
-                  <div
-                    className={styles.modalContentText}
-                    dangerouslySetInnerHTML={{
-                      __html: selectedStudy.content || '내용이 없습니다.'
-                    }}
-                  />
-                  {getFileUrl(selectedStudy.file_name1) && (
-                    <div className={styles.modalFile}>
-                      <a
-                        href={getFileUrl(selectedStudy.file_name1)}
-                        download
-                        className={styles.fileLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        📎 첨부파일: {selectedStudy.file_name1}
-                      </a>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
           </main>
         </div>
       </div>
